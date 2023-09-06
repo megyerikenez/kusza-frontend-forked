@@ -14,7 +14,7 @@ const maxLengthMessage = 'Maximum 50 karakter'
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
-    .email('Helytelen email formátum')
+    //.email('Helytelen email formátum')
     .min(5, 'Minimum 5 karakter')
     .max(maxLength, maxLengthMessage)
     .required(requiredMessage),
