@@ -5,7 +5,6 @@ const API_URL = process.env.REACT_APP_API_URL
 
 export const GET_USER_BY_ACCESSTOKEN_URL = `${API_URL}/kusza-auth/verify_token`
 export const LOGIN_URL = `${API_URL}/kusza-auth/login`
-export const REGISTER_URL = `${API_URL}/register`
 export const REQUEST_PASSWORD_URL = `${API_URL}/auth/forgot_password`
 
 // Server should return AuthModel
@@ -13,23 +12,6 @@ export function login(email: string, password: string) {
   return axios.post<AuthModel>(LOGIN_URL, {
     UserName: email,
     Password: password,
-  })
-}
-
-// Server should return AuthModel
-export function register(
-  email: string,
-  firstname: string,
-  lastname: string,
-  password: string,
-  password_confirmation: string
-) {
-  return axios.post(REGISTER_URL, {
-    email,
-    first_name: firstname,
-    last_name: lastname,
-    password,
-    password_confirmation,
   })
 }
 
