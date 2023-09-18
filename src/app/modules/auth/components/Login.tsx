@@ -4,9 +4,10 @@ import * as Yup from 'yup'
 import clsx from 'clsx'
 import {Link} from 'react-router-dom'
 import {useFormik} from 'formik'
-import {getUserByToken, login} from '../core/_requests'
+import {login} from '../core/_requests'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
-import {useAuth} from '../core/Auth'
+import {useDispatch} from 'react-redux'
+import {setUserData} from '../core/authSlice'
 
 const requiredMessage = 'Kötelező mező'
 const maxLength = 50
@@ -37,7 +38,7 @@ const initialValues = {
 
 export function Login() {
   const [loading, setLoading] = useState(false)
-  const {saveAuth, setCurrentUser} = useAuth()
+  const dispatch = useDispatch()
 
   const formik = useFormik({
     initialValues,
@@ -46,12 +47,11 @@ export function Login() {
       setLoading(true)
       try {
         const {data: auth} = await login(values.email, values.password)
-        saveAuth(auth)
-        const {data: user} = await getUserByToken(auth.api_token)
-        setCurrentUser(user)
+        dispatch(setUserData({userName: 'Mock', userRole: 'admin', userEmail: 'Mock'}))
+        //const {data: user} = await getUserByToken(auth.api_token)
+        //setCurrentUser(user)
       } catch (error) {
         console.error(error)
-        saveAuth(undefined)
         setStatus('Hibás bejelentkezési adatok')
         setSubmitting(false)
         setLoading(false)
