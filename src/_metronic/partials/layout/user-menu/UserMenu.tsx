@@ -1,11 +1,18 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import {Link} from 'react-router-dom'
-import {useAuth} from '../../../../app/modules/auth'
 import {toAbsoluteUrl} from '../../../helpers'
 import {Languages} from '../header-menus/Languages'
+import {useDispatch, useSelector} from 'react-redux'
+import {logoutUser} from '../../../../app/modules/auth/core/authSlice'
+import {userSelector} from '../../../../app/modules/auth/core/authSelector'
 
 const UserMenu = () => {
-  const {currentUser, logout} = useAuth()
+  const dispatch = useDispatch()
+  const currentUser = useSelector(userSelector)
+  const logout = () => {
+    dispatch(logoutUser)
+    document.location.reload()
+  }
   return (
     <div
       className='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px'
@@ -23,11 +30,11 @@ const UserMenu = () => {
           {/* begin::Username */}
           <div className='d-flex flex-column'>
             <div className='fw-bolder d-flex align-items-center fs-5'>
-              {currentUser?.first_name} {currentUser?.last_name}
+              {currentUser?.userName} {currentUser?.userName}
               <span className='badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2'>Pro</span>
             </div>
             <a href='#' className='fw-bold text-muted text-hover-primary fs-7'>
-              {currentUser?.email}
+              {currentUser?.userRole}
             </a>
           </div>
           {/* end::Username */}
