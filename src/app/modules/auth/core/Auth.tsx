@@ -1,17 +1,6 @@
-import {
-  FC,
-  useState,
-  useEffect,
-  createContext,
-  useContext,
-  useRef,
-  Dispatch,
-  SetStateAction,
-} from 'react'
-import {LayoutSplashScreen} from '../../../../_metronic/layout/core'
+import {FC, useState, createContext, Dispatch, SetStateAction} from 'react'
 import {AuthModel, UserModel} from './_models'
 import * as authHelper from './AuthHelpers'
-import {getUserByToken} from './_requests'
 import {WithChildren} from '../../../../_metronic/helpers'
 
 type AuthContextProps = {
@@ -31,10 +20,6 @@ const initAuthContextPropsState = {
 }
 
 const AuthContext = createContext<AuthContextProps>(initAuthContextPropsState)
-
-const useAuth = () => {
-  return useContext(AuthContext)
-}
 
 const AuthProvider: FC<WithChildren> = ({children}) => {
   const [auth, setAuth] = useState<AuthModel | undefined>(authHelper.getAuth())
@@ -60,42 +45,4 @@ const AuthProvider: FC<WithChildren> = ({children}) => {
   )
 }
 
-const AuthInit: FC<WithChildren> = ({children}) => {
-  const {auth, logout, setCurrentUser} = useAuth()
-  const didRequest = useRef(false)
-  const [showSplashScreen, setShowSplashScreen] = useState(true)
-  // We should request user by authToken (IN OUR EXAMPLE IT'S API_TOKEN) before rendering the application
-  useEffect(() => {
-    const requestUser = async (apiToken: string) => {
-      try {
-        if (!didRequest.current) {
-          const {data} = await getUserByToken(apiToken)
-          if (data) {
-            setCurrentUser(data)
-          }
-        }
-      } catch (error) {
-        console.error(error)
-        if (!didRequest.current) {
-          logout()
-        }
-      } finally {
-        setShowSplashScreen(false)
-      }
-
-      return () => (didRequest.current = true)
-    }
-
-    if (auth && auth.api_token) {
-      requestUser(auth.api_token)
-    } else {
-      logout()
-      setShowSplashScreen(false)
-    }
-    // eslint-disable-next-line
-  }, [])
-
-  return showSplashScreen ? <LayoutSplashScreen /> : <>{children}</>
-}
-
-export {AuthProvider, AuthInit, useAuth}
+export {AuthProvider}

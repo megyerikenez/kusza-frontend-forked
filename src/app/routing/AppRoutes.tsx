@@ -1,7 +1,7 @@
 import {FC} from 'react'
 import {Routes, Route, BrowserRouter, Navigate} from 'react-router-dom'
 import {ErrorsPage} from '../modules/errors/ErrorsPage'
-import {Logout, AuthPage} from '../modules/auth'
+import {AuthPage} from '../modules/auth'
 import {App} from '../App'
 import {useSelector} from 'react-redux'
 import {isUserAuthenticated} from '../modules/auth/core/authSelector'
@@ -15,7 +15,6 @@ const AppRoutes: FC = () => {
       <Routes>
         <Route element={<App />}>
           <Route path='error/*' element={<ErrorsPage />} />
-          <Route path='logout' element={<Logout />} />
           {isAuthorized ? (
             <>
               <Route path='/*' element={<PrivateRoutes />} />
