@@ -5,3 +5,8 @@ export const isUserAuthenticated = createSelector(
   (state: RootState) => state.auth.userEmail,
   (userEmail) => userEmail !== ''
 )
+
+export const userSelector = createSelector(
+  (state: RootState) => state.auth,
+  (auth) => auth
+)

@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import {FC} from 'react'
-import {useAuth} from '../../../../app/modules/auth'
 import {KTIcon, toAbsoluteUrl} from '../../../helpers'
 import {UserMenu} from '../user-menu/UserMenu'
+import {useSelector} from 'react-redux'
+import {userSelector} from '../../../../app/modules/auth/core/authSelector'
 
 const AsideUserMenu: FC = () => {
-  const {currentUser} = useAuth()
-
+  const user = useSelector(userSelector)
   return (
     <>
       <div className='d-flex flex-stack'>
@@ -20,9 +20,9 @@ const AsideUserMenu: FC = () => {
           {/* begin::User info */}
           <div className='ms-2'>
             <a href='#' className='text-gray-800 text-hover-primary fs-6 fw-bolder lh-1'>
-              {currentUser?.first_name} {currentUser?.first_name}
+              {user?.userName} {user?.userEmail}
             </a>
-            <span className='text-muted fw-bold d-block fs-7 lh-1'>Python Dev</span>
+            <span className='text-muted fw-bold d-block fs-7 lh-1'>{user.userRole}</span>
           </div>
           {/* end::User info */}
         </div>
