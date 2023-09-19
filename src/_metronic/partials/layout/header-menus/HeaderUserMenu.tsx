@@ -4,9 +4,16 @@ import {Link} from 'react-router-dom'
 import {Languages} from './Languages'
 import {useAuth} from '../../../../app/modules/auth'
 import {toAbsoluteUrl} from '../../../helpers'
+import {useDispatch} from 'react-redux'
+import {logoutUser} from '../../../../app/modules/auth/core/authSlice'
 
 const HeaderUserMenu: FC = () => {
-  const {currentUser, logout} = useAuth()
+  const dispatch = useDispatch()
+  const {currentUser} = useAuth()
+  const logout = () => {
+    dispatch(logoutUser)
+    document.location.reload()
+  }
   return (
     <div
       className='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px'
