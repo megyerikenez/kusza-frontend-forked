@@ -4,10 +4,11 @@ import * as Yup from 'yup'
 import clsx from 'clsx'
 import {Link} from 'react-router-dom'
 import {useFormik} from 'formik'
-import {login} from '../core/_requests'
+import {getUserDataByToken, login, setupAxiosAuthToken} from '../core/_requests'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {useDispatch} from 'react-redux'
 import {setUserData} from '../core/authSlice'
+import axios from 'axios'
 
 const requiredMessage = 'Kötelező mező'
 const maxLength = 50
@@ -46,10 +47,16 @@ export function Login() {
     onSubmit: async (values, {setStatus, setSubmitting}) => {
       setLoading(true)
       try {
-        const {data: auth} = await login(values.email, values.password)
-        dispatch(setUserData({userName: 'Mock', userRole: 'admin', userEmail: 'Mock'}))
-        //const {data: user} = await getUserByToken(auth.api_token)
-        //setCurrentUser(user)
+        const response = await login(values.email, values.password)
+        setupAxiosAuthToken(axios, response.data.result.token)
+        const userData = await getUserDataByToken()
+        dispatch(
+          setUserData({
+            userName: userData.data.result.name,
+            userRoles: userData.data.result.roles,
+            userID: userData.data.result.id,
+          })
+        )
       } catch (error) {
         console.error(error)
         setStatus('Hibás bejelentkezési adatok')

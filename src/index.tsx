@@ -19,7 +19,6 @@ import './_metronic/assets/sass/style.scss'
 import './_metronic/assets/sass/plugins.scss'
 import './_metronic/assets/sass/style.react.scss'
 import {AppRoutes} from './app/routing/AppRoutes'
-import {AuthProvider, setupAxios} from './app/modules/auth'
 import {Provider} from 'react-redux'
 import {store} from './app/store'
 /**
@@ -33,7 +32,6 @@ import {store} from './app/store'
  *
  * @see https://github.com/axios/axios#interceptors
  */
-setupAxios(axios)
 Chart.register(...registerables)
 
 const queryClient = new QueryClient()
@@ -43,9 +41,7 @@ if (container) {
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <MetronicI18nProvider>
-          <AuthProvider>
-            <AppRoutes />
-          </AuthProvider>
+          <AppRoutes />
         </MetronicI18nProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>

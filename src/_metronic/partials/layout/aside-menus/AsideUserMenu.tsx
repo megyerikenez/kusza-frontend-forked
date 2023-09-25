@@ -20,9 +20,9 @@ const AsideUserMenu: FC = () => {
           {/* begin::User info */}
           <div className='ms-2'>
             <a href='#' className='text-gray-800 text-hover-primary fs-6 fw-bolder lh-1'>
-              {user?.userName} {user?.userEmail}
+              {user?.userName}
             </a>
-            <span className='text-muted fw-bold d-block fs-7 lh-1'>{user.userRole}</span>
+            <span className='text-muted fw-bold d-block fs-7 lh-1'>{user.userName}</span>
           </div>
           {/* end::User info */}
         </div>
