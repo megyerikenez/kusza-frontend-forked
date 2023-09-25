@@ -1,8 +1,10 @@
 import {createSlice} from '@reduxjs/toolkit'
+import {setupAxiosAuthToken} from './_requests'
 
 const emptyState = {
   userName: '',
-  userRole: '',
+  userRoles: [],
+  userID: '',
   userEmail: '',
 }
 
@@ -12,11 +14,13 @@ export const authSlice = createSlice({
   reducers: {
     setUserData: (state, action) => {
       state.userName = action.payload.userName
-      state.userRole = action.payload.userRole
+      state.userRoles = action.payload.userRoles
       state.userEmail = action.payload.userEmail
+      state.userID = action.payload.userID
     },
     logoutUser: (state) => {
       state = emptyState
+      setupAxiosAuthToken(null, '')
     },
   },
 })
