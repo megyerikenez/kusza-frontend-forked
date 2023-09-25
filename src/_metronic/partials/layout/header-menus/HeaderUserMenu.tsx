@@ -31,7 +31,7 @@ const HeaderUserMenu: FC = () => {
               <span className='badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2'>Pro</span>
             </div>
             <a href='#' className='fw-bold text-muted text-hover-primary fs-7'>
-              {currentUser?.userEmail}
+              email
             </a>
           </div>
         </div>
