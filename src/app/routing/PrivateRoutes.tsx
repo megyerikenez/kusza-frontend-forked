@@ -3,9 +3,10 @@ import {MasterLayout} from '../../_metronic/layout/MasterLayout'
 import {DashboardWrapper} from '../pages/dashboard/DashboardWrapper'
 import {MenuTestPage} from '../pages/MenuTestPage'
 import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper'
+import {lazy} from 'react'
 
 const PrivateRoutes = () => {
-  // const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
+  const CreateNewBid = lazy(() => import('../pages/administrator/CreateNewBid/CreateNewBidPage'))
   // const WizardsPage = lazy(() => import('../modules/wizards/WizardsPage'))
   // const AccountPage = lazy(() => import('../modules/accounts/AccountPage'))
   // const WidgetsPage = lazy(() => import('../modules/widgets/WidgetsPage'))
@@ -22,55 +23,8 @@ const PrivateRoutes = () => {
         <Route path='builder' element={<BuilderPageWrapper />} />
         <Route path='menu-test' element={<MenuTestPage />} />
         {/* Lazy Modules */}
-        {/* <Route
-          path='crafted/pages/profile/*'
-          element={
-            <SuspensedView>
-              <ProfilePage />
-            </SuspensedView>
-          }
-        />
-        <Route
-          path='crafted/pages/wizards/*'
-          element={
-            <SuspensedView>
-              <WizardsPage />
-            </SuspensedView>
-          }
-        />
-        <Route
-          path='crafted/widgets/*'
-          element={
-            <SuspensedView>
-              <WidgetsPage />
-            </SuspensedView>
-          }
-        />
-        <Route
-          path='crafted/account/*'
-          element={
-            <SuspensedView>
-              <AccountPage />
-            </SuspensedView>
-          }
-        />
-        <Route
-          path='apps/chat/*'
-          element={
-            <SuspensedView>
-              <ChatPage />
-            </SuspensedView>
-          }
-        />
-        <Route
-          path='apps/user-management/*'
-          element={
-            <SuspensedView>
-              <UsersPage />
-            </SuspensedView>
-          }
-        /> */}
-        {/* Page Not Found */}
+        <Route path='administrator/createnewbid' element={<CreateNewBid />} />
+
         <Route path='*' element={<Navigate to='/error/404' />} />
       </Route>
     </Routes>
