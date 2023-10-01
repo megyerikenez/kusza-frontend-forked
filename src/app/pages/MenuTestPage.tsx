@@ -38,7 +38,7 @@ const MenuTestPage: FC = () => {
                   className='menu-item me-lg-2'
                 >
                   <span className='menu-link py-3'>
-                    <span className='menu-title'>Pages</span>
+                    <span className='menu-title'>Árajánlatok</span>
                     <span className='menu-arrow d-lg-none'></span>
                   </span>
                   <div
@@ -755,7 +755,7 @@ const MenuTestPage: FC = () => {
                       <SVG src={toAbsoluteUrl('/media/logos/default-small.svg')} />
                     </span>
                   </span>
-                  <span className='menu-title'>Pages</span>
+                  <span className='menu-title'>Árajánlatok</span>
                   <span className='menu-arrow'></span>
                 </span>
                 <div className='menu-sub menu-sub-accordion menu-active-bg'>
