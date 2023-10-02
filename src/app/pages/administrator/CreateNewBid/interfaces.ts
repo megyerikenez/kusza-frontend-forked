@@ -1,19 +1,19 @@
 interface IContractor {
-  Name: string
-  Delegate: string
-  Seat: string
-  TaxNumber: string
-  PhoneNumber: string
-  Email: string
+  name: string
+  delegate: string
+  seat: string
+  taxNumber: string
+  phoneNumber: string
+  email: string
 }
 
-interface IOrderItems {
-  ItemNumber: string
-  Quantity: number
-  Unit: number
-  Description: string
-  Currency: number
-  NetUnitPrice: number
+export interface IOrderItems {
+  itemNumber: string
+  quantity: number
+  unit: number
+  description: string
+  currency: number
+  netUnitPrice: number
 }
 
 export interface INewBid {

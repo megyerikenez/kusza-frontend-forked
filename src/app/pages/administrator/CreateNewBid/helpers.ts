@@ -1,4 +1,5 @@
 import * as Yup from 'yup'
+import {IOrderItems} from './interfaces'
 
 export const initialValues = {
   deliveryNumber: 'Delivery number',
@@ -24,7 +25,23 @@ export const initialValues = {
   supervisor: 'Supervisor',
   orderConfirmationItems: [
     {
-      itemNumber: 'csodaszer',
+      itemNumber: 'F-1000',
+      quantity: 5,
+      unit: 5,
+      description: 'csoda leiras',
+      currency: 5,
+      netUnitPrice: 5,
+    },
+    {
+      itemNumber: 'F-2000',
+      quantity: 5,
+      unit: 5,
+      description: 'csoda leiras',
+      currency: 5,
+      netUnitPrice: 5,
+    },
+    {
+      itemNumber: 'F-3000',
       quantity: 5,
       unit: 5,
       description: 'csoda leiras',
@@ -32,6 +49,10 @@ export const initialValues = {
       netUnitPrice: 5,
     },
   ],
+}
+
+export const addItem = (item: IOrderItems) => {
+  initialValues.orderConfirmationItems.push(item)
 }
 
 export const REQUIRED_MESSAGE = 'Kötelező mező'

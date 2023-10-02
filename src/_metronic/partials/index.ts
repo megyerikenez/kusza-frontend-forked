@@ -31,6 +31,7 @@ export * from './modals/create-app-stepper/CreateAppModal'
 export * from './modals/select-location/SelectLocationModal'
 export * from './modals/invite-users/InviteUsers'
 export * from './modals/upgrade-plan/UpgradePlan'
+export * from './modals/add-item/AddItemModal'
 
 // chat
 export * from './chat/ChatInner'

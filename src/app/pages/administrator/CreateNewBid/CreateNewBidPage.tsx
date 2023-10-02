@@ -2,10 +2,11 @@ import {useState} from 'react'
 import {useFormik, FormikValues} from 'formik'
 import {Tab, Tabs} from 'react-bootstrap'
 import {initialValues, newBidSchema} from './helpers'
-import {BaseDataRows} from './rows/BaseDataRows'
-import {ContractorDataRows} from './rows/ContractorDataRows'
-import {OrganizationDataRows} from './rows/OrganizationDataRows'
-import './CreateNewBid.css' // Import the CSS file containing the customization
+import {BaseDataRows} from './tabs/BaseDataTab'
+import {ContractorDataRows} from './tabs/ContractorDataTab'
+import {OrganizationDataRows} from './tabs/OrganizationDataRows'
+import './styles/CreateNewBid.css' // Import the CSS file containing the customization
+import {AddItems} from './tabs/AddItemsTab'
 
 type SelectCallback = (eventKey: string | null) => void
 
@@ -48,6 +49,9 @@ export function NewBidForm() {
         </Tab>
         <Tab eventKey='organizationData' title='Organization Data'>
           <OrganizationDataRows formik={formik} />
+        </Tab>
+        <Tab eventKey='addItems' title='Add Items'>
+          <AddItems formik={formik} />
         </Tab>
       </Tabs>
       <div className='d-grid mb-10'>
