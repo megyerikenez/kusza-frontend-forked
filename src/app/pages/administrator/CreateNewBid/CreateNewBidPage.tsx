@@ -2,9 +2,9 @@ import {useState} from 'react'
 import {useFormik, FormikValues} from 'formik'
 import {Tab, Tabs} from 'react-bootstrap'
 import {initialValues, newBidSchema} from './helpers'
-import {BaseDataRows} from './tabs/BaseDataTab'
-import {ContractorDataRows} from './tabs/ContractorDataTab'
-import {OrganizationDataRows} from './tabs/OrganizationDataRows'
+import {BaseDataTab} from './tabs/BaseDataTab'
+import {ContractorDataTab} from './tabs/ContractorDataTab'
+import {OrganizationDataTab} from './tabs/OrganizationDataTab'
 import './styles/CreateNewBid.css' // Import the CSS file containing the customization
 import {AddItems} from './tabs/AddItemsTab'
 
@@ -42,13 +42,13 @@ export function NewBidForm() {
     <form className='form w-100' onSubmit={formik.handleSubmit} noValidate id='new_bid_form'>
       <Tabs activeKey={activeTab} onSelect={handleTabSelect} id='bidTabs'>
         <Tab eventKey='baseData' title='Base Data'>
-          <BaseDataRows formik={formik} />
+          <BaseDataTab formik={formik} />
         </Tab>
         <Tab eventKey='contractorData' title='Contractor Data'>
-          <ContractorDataRows formik={formik} />
+          <ContractorDataTab formik={formik} />
         </Tab>
         <Tab eventKey='organizationData' title='Organization Data'>
-          <OrganizationDataRows formik={formik} />
+          <OrganizationDataTab formik={formik} />
         </Tab>
         <Tab eventKey='addItems' title='Add Items'>
           <AddItems formik={formik} />
