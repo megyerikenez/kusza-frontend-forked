@@ -33,14 +33,14 @@ export const AddItemModal = () => {
 
           <div className='modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15'>
             <div className='text-center mb-13'>
-              <h1 className='mb-3'>Add a new Item</h1>
+              <h1 className='mb-3'>Termék adatai</h1>
             </div>
 
             <Formik initialValues={initialValues} onSubmit={handleSubmit}>
               {() => (
                 <Form>
                   <div className='fv-row mb-10'>
-                    <label className='required fw-bold fs-6 mb-2'>Item Number</label>
+                    <label className='required fw-bold fs-6 mb-2'>Azonosító kód</label>
                     <Field
                       type='text'
                       className='form-control form-control-solid'
@@ -50,7 +50,7 @@ export const AddItemModal = () => {
                     <ErrorMessage name='itemNumber' component='div' className='fv-help-block' />
                   </div>
                   <div className='fv-row mb-10'>
-                    <label className='required fw-bold fs-6 mb-2'>Quantity</label>
+                    <label className='required fw-bold fs-6 mb-2'>Darab</label>
                     <Field
                       type='number'
                       className='form-control form-control-solid'
@@ -60,7 +60,7 @@ export const AddItemModal = () => {
                     <ErrorMessage name='quantity' component='div' className='fv-help-block' />
                   </div>
                   <div className='fv-row mb-10'>
-                    <label className='required fw-bold fs-6 mb-2'>Unit</label>
+                    <label className='required fw-bold fs-6 mb-2'>Egység</label>
                     <Field
                       type='number'
                       className='form-control form-control-solid'
@@ -70,7 +70,7 @@ export const AddItemModal = () => {
                     <ErrorMessage name='unit' component='div' className='fv-help-block' />
                   </div>
                   <div className='fv-row mb-10'>
-                    <label className='required fw-bold fs-6 mb-2'>Description</label>
+                    <label className='required fw-bold fs-6 mb-2'>Leírás</label>
                     <Field
                       type='text'
                       className='form-control form-control-solid'
@@ -80,7 +80,7 @@ export const AddItemModal = () => {
                     <ErrorMessage name='description' component='div' className='fv-help-block' />
                   </div>
                   <div className='fv-row mb-10'>
-                    <label className='required fw-bold fs-6 mb-2'>Currency</label>
+                    <label className='required fw-bold fs-6 mb-2'>Valuta</label>
                     <Field
                       type='number'
                       className='form-control form-control-solid'
@@ -91,7 +91,7 @@ export const AddItemModal = () => {
                   </div>
                   <div className='text-center'>
                     <button type='submit' className='btn btn-primary' data-bs-dismiss='modal'>
-                      Add Item
+                      Save
                     </button>
                   </div>
                 </Form>

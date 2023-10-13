@@ -12,13 +12,13 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
     <div className={`card mt-8 mb-8`}>
       <div className='card-header border-0 pt-5'>
         <h3 className='card-title align-items-start flex-column'>
-          <span className='card-label fw-bold fs-3 mb-1'>Organization Data</span>
+          <span className='card-label fw-bold fs-3 mb-1'>Organizáció adatai </span>
         </h3>
       </div>
       <div className='card-body py-3'>
         <div className='fv-row mb-8 mt-8' key={initialValues.confirmOrganizationUnit}>
           <label className='form-label fs-6 fw-bolder text-dark'>
-            {initialValues.confirmOrganizationUnit}
+            Organizáció egység megerősitése
           </label>
           <input
             placeholder={'Confirm Organization Unit'}
@@ -54,9 +54,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
         </div>
 
         <div className='fv-row mb-8' key={initialValues.paymentMethod}>
-          <label className='form-label fs-6 fw-bolder text-dark'>
-            {initialValues.paymentMethod}
-          </label>
+          <label className='form-label fs-6 fw-bolder text-dark'>Fizetési mód</label>
           <input
             placeholder={'Payment Method'}
             {...formik.getFieldProps('paymentMethod')}
@@ -88,9 +86,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
         </div>
 
         <div className='fv-row mb-8' key={initialValues.deliveryDate}>
-          <label className='form-label fs-6 fw-bolder text-dark'>
-            {initialValues.deliveryDate}
-          </label>
+          <label className='form-label fs-6 fw-bolder text-dark'>Szállítás dátuma</label>
           <input
             placeholder={'Delivery Date'}
             {...formik.getFieldProps('deliveryDate')}
@@ -122,9 +118,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
         </div>
 
         <div className='fv-row mb-8' key={initialValues.invoiceAddress}>
-          <label className='form-label fs-6 fw-bolder text-dark'>
-            {initialValues.invoiceAddress}
-          </label>
+          <label className='form-label fs-6 fw-bolder text-dark'>Számlázási cím</label>
           <input
             placeholder={'Invoice Address'}
             {...formik.getFieldProps('invoiceAddress')}
@@ -156,7 +150,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
         </div>
 
         <div className='fv-row mb-8' key={initialValues.year}>
-          <label className='form-label fs-6 fw-bolder text-dark'>{initialValues.year}</label>
+          <label className='form-label fs-6 fw-bolder text-dark'>Év</label>
           <input
             placeholder={'Year'}
             {...formik.getFieldProps('year')}
@@ -186,7 +180,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
         </div>
 
         <div className='fv-row mb-8' key={initialValues.faculty}>
-          <label className='form-label fs-6 fw-bolder text-dark'>{initialValues.faculty}</label>
+          <label className='form-label fs-6 fw-bolder text-dark'>Facilitás</label>
           <input
             placeholder={'Faculty'}
             {...formik.getFieldProps('faculty')}
@@ -216,9 +210,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
         </div>
 
         <div className='fv-row mb-8' key={initialValues.confirmationNumber}>
-          <label className='form-label fs-6 fw-bolder text-dark'>
-            {initialValues.confirmationNumber}
-          </label>
+          <label className='form-label fs-6 fw-bolder text-dark'>Megerősítő szám</label>
           <input
             placeholder={'Confirmation Number'}
             {...formik.getFieldProps('confirmationNumber')}
@@ -251,7 +243,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
         </div>
 
         <div className='fv-row mb-8' key={initialValues.category}>
-          <label className='form-label fs-6 fw-bolder text-dark'>{initialValues.category}</label>
+          <label className='form-label fs-6 fw-bolder text-dark'>Kategória</label>
           <input
             placeholder={'Category'}
             {...formik.getFieldProps('category')}
@@ -281,9 +273,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
         </div>
 
         <div className='fv-row mb-8' key={initialValues.offerDescription}>
-          <label className='form-label fs-6 fw-bolder text-dark'>
-            {initialValues.offerDescription}
-          </label>
+          <label className='form-label fs-6 fw-bolder text-dark'>Ajánlat leírása</label>
           <input
             placeholder={'Offer Description'}
             {...formik.getFieldProps('offerDescription')}
@@ -316,7 +306,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
         </div>
 
         <div className='fv-row mb-8' key={initialValues.supervisor}>
-          <label className='form-label fs-6 fw-bolder text-dark'>{initialValues.supervisor}</label>
+          <label className='form-label fs-6 fw-bolder text-dark'>Felül vizsgáló</label>
           <input
             placeholder={'Supervisor'}
             {...formik.getFieldProps('supervisor')}

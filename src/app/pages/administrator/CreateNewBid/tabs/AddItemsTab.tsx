@@ -31,9 +31,9 @@ export const AddItems: React.FC<AddItemsProps> = ({formik}) => {
       {/* begin::Header */}
       <div className='card-header border-0 pt-5'>
         <h3 className='card-title align-items-start flex-column'>
-          <span className='card-label fw-bold fs-3 mb-1'>Add Items</span>
+          <span className='card-label fw-bold fs-3 mb-1'>Termék hozzáadása</span>
           <span className='text-muted mt-1 fw-semibold fs-7'>
-            Current Items: {currentItemsLength}
+            Jelenlegi termékek: {currentItemsLength}
           </span>
         </h3>
         <div
@@ -50,7 +50,7 @@ export const AddItems: React.FC<AddItemsProps> = ({formik}) => {
             data-bs-target='#modal_add_item'
           >
             <KTIcon iconName='plus' className='fs-3' />
-            New Item
+            Új termék hozzáadása
           </a>
         </div>
       </div>
@@ -75,12 +75,12 @@ export const AddItems: React.FC<AddItemsProps> = ({formik}) => {
                     />
                   </div>
                 </th>
-                <th className='min-w-100px'>Item Number</th>
-                <th className='min-w-100px'>Quantity</th>
-                <th className='min-w-100px'>Unit</th>
-                <th className='min-w-100px'>Description</th>
-                <th className='min-w-100px'>Currency</th>
-                <th className='min-w-100px'>Netto Unit Price</th>
+                <th className='min-w-100px'>Termék azonositó</th>
+                <th className='min-w-100px'>Darab</th>
+                <th className='min-w-100px'>Egység</th>
+                <th className='min-w-100px'>Leírás</th>
+                <th className='min-w-100px'>Valuta</th>
+                <th className='min-w-100px'>Netto egységár</th>
               </tr>
             </thead>
             {/* end::Table head */}

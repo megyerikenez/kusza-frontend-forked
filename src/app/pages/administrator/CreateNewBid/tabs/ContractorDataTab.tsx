@@ -12,14 +12,12 @@ export const ContractorDataTab: React.FC<ContractorDataTabProps> = ({formik}) =>
     <div className={`card mt-8 mb-8`}>
       <div className='card-header border-0 pt-5'>
         <h3 className='card-title align-items-start flex-column'>
-          <span className='card-label fw-bold fs-3 mb-1'>Contractor Data</span>
+          <span className='card-label fw-bold fs-3 mb-1'>Kontraktori adatok</span>
         </h3>
       </div>
       <div className='card-body py-3'>
         <div className='fv-row mb-8 mt-8' key={initialValues.contractorName}>
-          <label className='form-label fs-6 fw-bolder text-dark'>
-            {initialValues.contractorName}
-          </label>
+          <label className='form-label fs-6 fw-bolder text-dark'>Kontakt neve</label>
           <input
             placeholder={'contractorName'}
             {...formik.getFieldProps('contractorName')}
@@ -51,9 +49,7 @@ export const ContractorDataTab: React.FC<ContractorDataTabProps> = ({formik}) =>
         </div>
 
         <div className='fv-row mb-8' key={initialValues.contractorDelegate}>
-          <label className='form-label fs-6 fw-bolder text-dark'>
-            {initialValues.contractorDelegate}
-          </label>
+          <label className='form-label fs-6 fw-bolder text-dark'>Organizáció</label>
           <input
             placeholder={'contractorDelegate'}
             {...formik.getFieldProps('contractorDelegate')}
@@ -86,9 +82,7 @@ export const ContractorDataTab: React.FC<ContractorDataTabProps> = ({formik}) =>
         </div>
 
         <div className='fv-row mb-8' key={initialValues.contractorSeat}>
-          <label className='form-label fs-6 fw-bolder text-dark'>
-            {initialValues.contractorSeat}
-          </label>
+          <label className='form-label fs-6 fw-bolder text-dark'>Telephely</label>
           <input
             placeholder={'contractorSeat'}
             {...formik.getFieldProps('contractorSeat')}
@@ -120,9 +114,7 @@ export const ContractorDataTab: React.FC<ContractorDataTabProps> = ({formik}) =>
         </div>
 
         <div className='fv-row mb-8' key={initialValues.contractorTaxNumber}>
-          <label className='form-label fs-6 fw-bolder text-dark'>
-            {initialValues.contractorTaxNumber}
-          </label>
+          <label className='form-label fs-6 fw-bolder text-dark'>Adószám</label>
           <input
             placeholder={'contractorTaxNumber'}
             {...formik.getFieldProps('contractorTaxNumber')}
@@ -155,9 +147,7 @@ export const ContractorDataTab: React.FC<ContractorDataTabProps> = ({formik}) =>
         </div>
 
         <div className='fv-row mb-8' key={initialValues.contractorPhoneNumber}>
-          <label className='form-label fs-6 fw-bolder text-dark'>
-            {initialValues.contractorPhoneNumber}
-          </label>
+          <label className='form-label fs-6 fw-bolder text-dark'>Telefonszám</label>
           <input
             placeholder={'contractorPhoneNumber'}
             {...formik.getFieldProps('contractorPhoneNumber')}
@@ -190,9 +180,7 @@ export const ContractorDataTab: React.FC<ContractorDataTabProps> = ({formik}) =>
         </div>
 
         <div className='fv-row mb-8' key={initialValues.contractorEmail}>
-          <label className='form-label fs-6 fw-bolder text-dark'>
-            {initialValues.contractorEmail}
-          </label>
+          <label className='form-label fs-6 fw-bolder text-dark'>Email cím</label>
           <input
             placeholder={'contractorEmail'}
             {...formik.getFieldProps('contractorEmail')}
@@ -224,9 +212,7 @@ export const ContractorDataTab: React.FC<ContractorDataTabProps> = ({formik}) =>
         </div>
 
         <div className='fv-row mb-8' key={initialValues.contractorContact}>
-          <label className='form-label fs-6 fw-bolder text-dark'>
-            {initialValues.contractorContact}
-          </label>
+          <label className='form-label fs-6 fw-bolder text-dark'>Kontakt kontakt?????</label>
           <input
             placeholder={'contractorContact'}
             {...formik.getFieldProps('contractorContact')}

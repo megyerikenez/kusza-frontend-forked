@@ -12,14 +12,12 @@ export const BaseDataTab: React.FC<BaseDataTabProps> = ({formik}) => {
     <div className={`card mt-8 mb-8`}>
       <div className='card-header border-0 pt-5'>
         <h3 className='card-title align-items-start flex-column'>
-          <span className='card-label fw-bold fs-3 mb-1'>Base Data</span>
+          <span className='card-label fw-bold fs-3 mb-1'>Alap adatok</span>
         </h3>
       </div>
       <div className='card-body py-3'>
         <div className='fv-row mb-8 mt-8' key={initialValues.deliveryNumber}>
-          <label className='form-label fs-6 fw-bolder text-dark'>
-            {initialValues.deliveryNumber}
-          </label>
+          <label className='form-label fs-6 fw-bolder text-dark'>Azonositó kód</label>
           <input
             placeholder={'deliveryNumber'}
             {...formik.getFieldProps('deliveryNumber')}
@@ -50,7 +48,7 @@ export const BaseDataTab: React.FC<BaseDataTabProps> = ({formik}) => {
           )}
         </div>
         <div className='fv-row mb-8' key={initialValues.description}>
-          <label className='form-label fs-6 fw-bolder text-dark'>{initialValues.description}</label>
+          <label className='form-label fs-6 fw-bolder text-dark'>Leírás</label>
           <input
             placeholder={'description'}
             {...formik.getFieldProps('description')}
@@ -81,9 +79,7 @@ export const BaseDataTab: React.FC<BaseDataTabProps> = ({formik}) => {
           )}
         </div>
         <div className='fv-row mb-8' key={initialValues.deliveryDate}>
-          <label className='form-label fs-6 fw-bolder text-dark'>
-            {initialValues.deliveryDate}
-          </label>
+          <label className='form-label fs-6 fw-bolder text-dark'>Szállítás dátuma</label>
           <input
             placeholder={'deliveryDate'}
             {...formik.getFieldProps('deliveryDate')}
@@ -114,9 +110,7 @@ export const BaseDataTab: React.FC<BaseDataTabProps> = ({formik}) => {
           )}
         </div>
         <div className='fv-row mb-8' key={initialValues.supplierRequester}>
-          <label className='form-label fs-6 fw-bolder text-dark'>
-            {initialValues.supplierRequester}
-          </label>
+          <label className='form-label fs-6 fw-bolder text-dark'>Beszerző</label>
           <input
             placeholder={'supplierRequester'}
             {...formik.getFieldProps('supplierRequester')}
@@ -148,9 +142,7 @@ export const BaseDataTab: React.FC<BaseDataTabProps> = ({formik}) => {
           )}
         </div>
         <div className='fv-row mb-8' key={initialValues.purchaserOrderNumber}>
-          <label className='form-label fs-6 fw-bolder text-dark'>
-            {initialValues.purchaserOrderNumber}
-          </label>
+          <label className='form-label fs-6 fw-bolder text-dark'>Vevői rendelés szám</label>
           <input
             placeholder={'purchaserOrderNumber'}
             {...formik.getFieldProps('purchaserOrderNumber')}
