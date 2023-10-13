@@ -1,9 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useEffect} from 'react'
+import React, {useEffect, useRef} from 'react'
 import {FormikProps, FormikValues} from 'formik'
 import {IOrderItems} from '../interfaces'
 import {KTIcon} from '../../../../../_metronic/helpers'
 import {ItemTableData} from './ItemTableData'
+import {useSelector} from 'react-redux'
+import {selectItem} from '../itemSelector'
 
 interface AddItemsProps {
   formik: FormikProps<FormikValues>
@@ -11,10 +13,18 @@ interface AddItemsProps {
 
 export const AddItems: React.FC<AddItemsProps> = ({formik}) => {
   const currentItemsLength = formik.values['orderConfirmationItems'].length
+  let items = useSelector(selectItem)
+  const prevItemsRef = useRef(items)
 
   useEffect(() => {
-    console.log('formik.values', formik.values)
-  }, [formik.values])
+    if (items !== prevItemsRef.current) {
+      formik.setFieldValue('orderConfirmationItems', [
+        ...formik.values['orderConfirmationItems'],
+        items,
+      ])
+      prevItemsRef.current = items
+    }
+  }, [formik, formik.values, items, prevItemsRef])
 
   return (
     <div className={`card mt-8 mb-8`}>

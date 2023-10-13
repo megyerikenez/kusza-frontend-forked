@@ -17,6 +17,7 @@ export const AddItemModal = () => {
   }
 
   const handleSubmit = (values: IOrderItems) => {
+    console.log('values', values)
     dispatch(addItem(values))
   }
 

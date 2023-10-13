@@ -14,7 +14,12 @@ export const itemSlice = createSlice({
   initialState: emptyState,
   reducers: {
     addItem: (state, action) => {
-      state = action.payload
+      state.itemNumber = action.payload.itemNumber
+      state.quantity = action.payload.quantity
+      state.unit = action.payload.unit
+      state.description = action.payload.description
+      state.currency = action.payload.currency
+      state.netUnitPrice = action.payload.netUnitPrice
     },
   },
 })
