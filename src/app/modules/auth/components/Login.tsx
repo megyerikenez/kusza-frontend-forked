@@ -4,11 +4,12 @@ import * as Yup from 'yup'
 import clsx from 'clsx'
 import {Link} from 'react-router-dom'
 import {useFormik} from 'formik'
-import {getUserDataByToken, login, setupAxiosAuthToken} from '../core/_requests'
+import {getUserBids, getUserDataByToken, login, setupAxiosAuthToken} from '../core/_requests'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {useDispatch} from 'react-redux'
 import {setUserData} from '../core/authSlice'
 import axios from 'axios'
+import {setBids} from '../../../pages/administrator/administratorSlice'
 
 const requiredMessage = 'Kötelező mező'
 const maxLength = 50
@@ -57,6 +58,8 @@ export function Login() {
             userID: userData.data.result.id,
           })
         )
+        const userBids = await getUserBids()
+        dispatch(setBids(userBids.data.result))
       } catch (error) {
         console.error(error)
         setStatus('Hibás bejelentkezési adatok')

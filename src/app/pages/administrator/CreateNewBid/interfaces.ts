@@ -17,8 +17,9 @@ export interface IOrderItems {
 }
 
 export interface INewBid {
+  id: number
   DeliveryNumber: string
-  Description: string
+  description: string
   SupplierRequester: string
   PurchaserOrderNumber: string
   Contractor: IContractor

@@ -28,7 +28,7 @@ export function AsideMenuMain() {
             icon='black-right'
             fontIcon='bi-person'
           >
-            <AsideMenuItem to='/crafted/account/overview' title='Összes' hasBullet={true} />
+            <AsideMenuItem to='/administrator/bids/all' title='Összes' hasBullet={true} />
             <AsideMenuItem to='/crafted/account/settings' title='Elfogadott' hasBullet={true} />
             <AsideMenuItem to='/crafted/account/settings' title='Elutasitott' hasBullet={true} />
             <AsideMenuItem

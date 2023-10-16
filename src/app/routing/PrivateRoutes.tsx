@@ -7,6 +7,7 @@ import {lazy} from 'react'
 
 const PrivateRoutes = () => {
   const CreateNewBid = lazy(() => import('../pages/administrator/CreateNewBid/CreateNewBidPage'))
+  const ListAllBid = lazy(() => import('../pages/administrator/ListBids/ListAllBid'))
   // const WizardsPage = lazy(() => import('../modules/wizards/WizardsPage'))
   // const AccountPage = lazy(() => import('../modules/accounts/AccountPage'))
   // const WidgetsPage = lazy(() => import('../modules/widgets/WidgetsPage'))
@@ -24,6 +25,7 @@ const PrivateRoutes = () => {
         <Route path='menu-test' element={<MenuTestPage />} />
         {/* Lazy Modules */}
         <Route path='administrator/createnewbid' element={<CreateNewBid />} />
+        <Route path='/administrator/bids/all' element={<ListAllBid />} />
 
         <Route path='*' element={<Navigate to='/error/404' />} />
       </Route>

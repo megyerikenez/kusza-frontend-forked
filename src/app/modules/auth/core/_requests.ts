@@ -5,9 +5,9 @@ const API_URL = process.env.REACT_APP_API_URL
 
 export const GET_USER_BY_ACCESSTOKEN_URL = `${API_URL}/kusza-auth/getuserinfo`
 export const LOGIN_URL = `${API_URL}/kusza-auth/login`
+export const GET_BID_BY_USERID_URL = `${API_URL}/orderconfirmation/getbyuserid`
 export const REQUEST_PASSWORD_URL = `${API_URL}/auth/forgot_password`
 
-// Server should return AuthModel
 export function login(email: string, password: string) {
   return axios.post<AuthModel>(LOGIN_URL, {
     UserName: email,
@@ -15,7 +15,6 @@ export function login(email: string, password: string) {
   })
 }
 
-// Server should return object => { result: boolean } (Is Email in DB)
 export function requestPassword(email: string) {
   return axios.post<{result: boolean}>(REQUEST_PASSWORD_URL, {
     email,
@@ -28,4 +27,8 @@ export function getUserDataByToken() {
 
 export function setupAxiosAuthToken(axios: any, token: string) {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`
+}
+
+export function getUserBids() {
+  return axios.get(GET_BID_BY_USERID_URL)
 }

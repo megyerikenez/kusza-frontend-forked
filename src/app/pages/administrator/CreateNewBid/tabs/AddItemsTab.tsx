@@ -13,18 +13,32 @@ interface AddItemsProps {
 
 export const AddItems: React.FC<AddItemsProps> = ({formik}) => {
   const currentItemsLength = formik.values['orderConfirmationItems'].length
-  let items = useSelector(selectItem)
-  const prevItemsRef = useRef(items)
+  let itemLastCreated = useSelector(selectItem)
+  let itemList = formik.values['orderConfirmationItems']
+  const prevItemsRef = useRef({
+    itemNumber: '',
+    description: '',
+    quantity: 0,
+    unit: 0,
+    netUnitPrice: 0,
+    currency: 0,
+  })
 
   useEffect(() => {
-    if (items !== prevItemsRef.current) {
+    if (
+      itemLastCreated &&
+      itemLastCreated.itemNumber &&
+      itemList.find((i: IOrderItems) => i.itemNumber === itemLastCreated.itemNumber) ===
+        undefined &&
+      itemLastCreated.itemNumber !== prevItemsRef.current.itemNumber
+    ) {
       formik.setFieldValue('orderConfirmationItems', [
         ...formik.values['orderConfirmationItems'],
-        items,
+        itemLastCreated,
       ])
-      prevItemsRef.current = items
+      prevItemsRef.current = itemLastCreated
     }
-  }, [formik, formik.values, items, prevItemsRef])
+  }, [formik, formik.values, itemLastCreated, prevItemsRef, itemList])
 
   return (
     <div className={`card mt-8 mb-8`}>
@@ -115,6 +129,7 @@ export const AddItems: React.FC<AddItemsProps> = ({formik}) => {
                                 (i: IOrderItems) => i.itemNumber !== item.itemNumber
                               )
                             )
+                            prevItemsRef.current = {...item}
                           }}
                           className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'
                         >
