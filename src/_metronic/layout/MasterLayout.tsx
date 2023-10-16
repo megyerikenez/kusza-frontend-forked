@@ -7,7 +7,7 @@ import {RightToolbar} from '../partials/layout/RightToolbar'
 import {ScrollTop} from './components/ScrollTop'
 import {Content} from './components/Content'
 import {PageDataProvider} from './core'
-import {ActivityDrawer, DrawerMessenger, InviteUsers, UpgradePlan} from '../partials'
+import {ActivityDrawer, AddItemModal, DrawerMessenger, InviteUsers, UpgradePlan} from '../partials'
 import {ThemeModeProvider} from '../partials/layout/theme-mode/ThemeModeProvider'
 import {MenuComponent} from '../assets/ts/components'
 import {Sidebar} from './components/Sidebar'
@@ -55,6 +55,7 @@ const MasterLayout = () => {
         {/* begin:: Modals */}
         <InviteUsers />
         <UpgradePlan />
+        <AddItemModal />
         {/* end:: Modals */}
         <ScrollTop />
       </ThemeModeProvider>
