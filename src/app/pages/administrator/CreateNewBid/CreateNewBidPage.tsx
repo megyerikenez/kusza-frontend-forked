@@ -41,7 +41,7 @@ export function NewBidForm() {
 
   return (
     <>
-      <PageTitle breadcrumbs={[]}>Új árajánlat létrehozása</PageTitle>
+      <PageTitle>Új árajánlat létrehozása</PageTitle>
 
       <form className='form w-100' onSubmit={formik.handleSubmit} noValidate id='new_bid_form'>
         <Tabs activeKey={activeTab} onSelect={handleTabSelect} id='bidTabs'>

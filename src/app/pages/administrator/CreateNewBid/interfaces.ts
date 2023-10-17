@@ -18,21 +18,21 @@ export interface IOrderItems {
 
 export interface INewBid {
   id: number
-  DeliveryNumber: string
+  deliveryNumber: string
   description: string
-  SupplierRequester: string
-  PurchaserOrderNumber: string
-  Contractor: IContractor
-  ContractorContact: string
-  ConfirmOrganizationUnit: string
-  PaymentMethod: number
-  DeliveryDate: string
-  InvoiceAddress: string
-  Year: number
-  Faculty: string
-  ConfirmationNumber: string
-  Category: string
-  OfferDescription: string
-  Supervisor: string
-  OrderConfirmationItems: IOrderItems[]
+  supplierRequester: string
+  purchaserOrderNumber: string
+  contractor: IContractor
+  contractorContact: string
+  confirmOrganizationUnit: string
+  paymentMethod: number
+  deliveryDate: string
+  invoiceAddress: string
+  year: number
+  faculty: string
+  confirmationNumber: string
+  category: string
+  offerDescription: string
+  supervisor: string
+  orderConfirmationItems: IOrderItems[]
 }
