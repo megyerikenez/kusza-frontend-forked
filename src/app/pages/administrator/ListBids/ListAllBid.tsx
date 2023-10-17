@@ -2,6 +2,7 @@ import {useSelector} from 'react-redux'
 import {selectBids} from '../administratorSelector'
 import {INewBid} from '../CreateNewBid/interfaces'
 import {PageTitle} from '../../../../_metronic/layout/core'
+import {AccordionBodyWrapper} from './AccordionBody/AccordionBodyWrapper'
 
 export const ListAllBid = () => {
   const bids = useSelector(selectBids)
@@ -38,7 +39,9 @@ export const ListAllBid = () => {
                 aria-labelledby={accordionHeaderId}
                 data-bs-parent='#kt_accordion_1'
               >
-                <div className='accordion-body'>{bid.description}</div>
+                <div className='accordion-body'>
+                  <AccordionBodyWrapper {...bid} />
+                </div>
               </div>
             </div>
           )
