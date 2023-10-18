@@ -7,6 +7,15 @@ interface IContractor {
   email: string
 }
 
+interface IBidHistory {
+  userId: number
+  fromStatus: string
+  toStatus: string
+  date: string
+  reason: string
+  id: number
+  deleted: boolean
+}
 export interface IOrderItems {
   itemNumber: string
   quantity: number
@@ -35,4 +44,5 @@ export interface INewBid {
   offerDescription: string
   supervisor: string
   orderConfirmationItems: IOrderItems[]
+  statusHistory: IBidHistory[]
 }
