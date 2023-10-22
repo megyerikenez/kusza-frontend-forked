@@ -19,7 +19,39 @@ export const BaseDataTab: React.FC<BaseDataTabProps> = ({formik}) => {
           <span className='card-label fw-bold fs-3 mb-1'>Alap adatok</span>
         </h3>
       </div>
+
       <div className='card-body py-3'>
+        <div className='fv-row mb-8' key={initialValues.description}>
+          <label className='form-label fs-6 fw-bolder text-dark'>Leírás</label>
+          <input
+            placeholder={'description'}
+            {...formik.getFieldProps('description')}
+            className={clsx(
+              'form-control bg-transparent',
+              {
+                'is-invalid':
+                  formik.touched['description'] && formik.errors[initialValues.description],
+              },
+              {
+                'is-valid':
+                  formik.touched[initialValues.description] &&
+                  !formik.errors[initialValues.description],
+              }
+            )}
+            type='text'
+          />
+          {formik.touched.description && formik.errors.description && (
+            <div className='fv-plugins-message-container'>
+              <div className='fv-help-block'>
+                {typeof formik.errors.description === 'string' ? (
+                  <span role='alert'>{formik.errors.description}</span>
+                ) : (
+                  <span role='alert'>An error occurred with the description field.</span>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
         <div className='fv-row mb-8 mt-8' key={initialValues.deliveryNumber}>
           <label className='form-label fs-6 fw-bolder text-dark'>Azonositó kód</label>
           <input
