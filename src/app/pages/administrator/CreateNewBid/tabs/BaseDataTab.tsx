@@ -2,12 +2,16 @@ import React from 'react'
 import {useFormik} from 'formik'
 import clsx from 'clsx'
 import {initialValues} from '../helpers'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 interface BaseDataTabProps {
   formik: ReturnType<typeof useFormik>
 }
 
 export const BaseDataTab: React.FC<BaseDataTabProps> = ({formik}) => {
+  const [selectedDate, setSelectedDate] = React.useState<Date | null>(null)
+
   return (
     <div className={`card mt-8 mb-8`}>
       <div className='card-header border-0 pt-5'>
@@ -47,67 +51,31 @@ export const BaseDataTab: React.FC<BaseDataTabProps> = ({formik}) => {
             </div>
           )}
         </div>
-        <div className='fv-row mb-8' key={initialValues.description}>
-          <label className='form-label fs-6 fw-bolder text-dark'>Leírás</label>
-          <input
-            placeholder={'description'}
-            {...formik.getFieldProps('description')}
-            className={clsx(
-              'form-control bg-transparent',
-              {
-                'is-invalid':
-                  formik.touched['description'] && formik.errors[initialValues.description],
-              },
-              {
-                'is-valid':
-                  formik.touched[initialValues.description] &&
-                  !formik.errors[initialValues.description],
-              }
-            )}
-            type='text'
-          />
-          {formik.touched.description && formik.errors.description && (
-            <div className='fv-plugins-message-container'>
-              <div className='fv-help-block'>
-                {typeof formik.errors.description === 'string' ? (
-                  <span role='alert'>{formik.errors.description}</span>
-                ) : (
-                  <span role='alert'>An error occurred with the description field.</span>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
         <div className='fv-row mb-8' key={initialValues.deliveryDate}>
-          <label className='form-label fs-6 fw-bolder text-dark'>Szállítás dátuma</label>
-          <input
-            placeholder={'deliveryDate'}
-            {...formik.getFieldProps('deliveryDate')}
-            className={clsx(
-              'form-control bg-transparent',
-              {
-                'is-invalid':
-                  formik.touched['deliveryDate'] && formik.errors[initialValues.deliveryDate],
-              },
-              {
-                'is-valid':
-                  formik.touched[initialValues.deliveryDate] &&
-                  !formik.errors[initialValues.deliveryDate],
-              }
-            )}
-            type='text'
-          />
-          {formik.touched.deliveryDate && formik.errors.deliveryDate && (
-            <div className='fv-plugins-message-container'>
-              <div className='fv-help-block'>
-                {typeof formik.errors.deliveryDate === 'string' ? (
-                  <span role='alert'>{formik.errors.deliveryDate}</span>
-                ) : (
-                  <span role='alert'>An error occurred with the deliveryDate field.</span>
-                )}
+          <label className='form-label fs-6 fw-bolder text-dark date'>Szállítás dátuma</label>
+          <div>
+            <DatePicker
+              selected={selectedDate}
+              onChange={(date: Date | null) => {
+                setSelectedDate(date)
+                formik.setFieldValue('deliveryDate', date)
+              }}
+              className={clsx('form-control bg-transparent', {
+                'is-invalid': formik.touched['deliveryDate'] && formik.errors['deliveryDate'],
+              })}
+            />
+            {formik.touched['deliveryDate'] && formik.errors['deliveryDate'] && (
+              <div className='fv-plugins-message-container'>
+                <div className='fv-help-block'>
+                  {typeof formik.errors['deliveryDate'] === 'string' ? (
+                    <span role='alert'>{formik.errors['deliveryDate']}</span>
+                  ) : (
+                    <span role='alert'>An error occurred with the deliveryDate field.</span>
+                  )}
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
         <div className='fv-row mb-8' key={initialValues.supplierRequester}>
           <label className='form-label fs-6 fw-bolder text-dark'>Beszerző</label>
