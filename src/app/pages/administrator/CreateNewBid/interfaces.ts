@@ -7,6 +7,15 @@ interface IContractor {
   email: string
 }
 
+interface IBidHistory {
+  userId: number
+  fromStatus: string
+  toStatus: string
+  date: string
+  reason: string
+  id: number
+  deleted: boolean
+}
 export interface IOrderItems {
   itemNumber: string
   quantity: number
@@ -17,21 +26,23 @@ export interface IOrderItems {
 }
 
 export interface INewBid {
-  DeliveryNumber: string
-  Description: string
-  SupplierRequester: string
-  PurchaserOrderNumber: string
-  Contractor: IContractor
-  ContractorContact: string
-  ConfirmOrganizationUnit: string
-  PaymentMethod: number
-  DeliveryDate: string
-  InvoiceAddress: string
-  Year: number
-  Faculty: string
-  ConfirmationNumber: string
-  Category: string
-  OfferDescription: string
-  Supervisor: string
-  OrderConfirmationItems: IOrderItems[]
+  id: number
+  deliveryNumber: string
+  description: string
+  supplierRequester: string
+  purchaserOrderNumber: string
+  contractor: IContractor
+  contractorContact: string
+  confirmOrganizationUnit: string
+  paymentMethod: number
+  deliveryDate: string
+  invoiceAddress: string
+  year: number
+  faculty: string
+  confirmationNumber: string
+  category: string
+  offerDescription: string
+  supervisor: string
+  orderConfirmationItems: IOrderItems[]
+  statusHistory: IBidHistory[]
 }
