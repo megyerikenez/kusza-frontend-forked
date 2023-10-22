@@ -84,39 +84,6 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
             </div>
           )}
         </div>
-
-        <div className='fv-row mb-8' key={initialValues.deliveryDate}>
-          <label className='form-label fs-6 fw-bolder text-dark'>Szállítás dátuma</label>
-          <input
-            placeholder={'Delivery Date'}
-            {...formik.getFieldProps('deliveryDate')}
-            className={clsx(
-              'form-control bg-transparent',
-              {
-                'is-invalid':
-                  formik.touched['deliveryDate'] && formik.errors[initialValues.deliveryDate],
-              },
-              {
-                'is-valid':
-                  formik.touched[initialValues.deliveryDate] &&
-                  !formik.errors[initialValues.deliveryDate],
-              }
-            )}
-            type='text'
-          />
-          {formik.touched.deliveryDate && formik.errors.deliveryDate && (
-            <div className='fv-plugins-message-container'>
-              <div className='fv-help-block'>
-                {typeof formik.errors.deliveryDate === 'string' ? (
-                  <span role='alert'>{formik.errors.deliveryDate}</span>
-                ) : (
-                  <span role='alert'>An error occurred with the Delivery Date field.</span>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
-
         <div className='fv-row mb-8' key={initialValues.invoiceAddress}>
           <label className='form-label fs-6 fw-bolder text-dark'>Számlázási cím</label>
           <input

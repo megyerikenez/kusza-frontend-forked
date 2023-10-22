@@ -90,7 +90,7 @@ export const BaseDataTab: React.FC<BaseDataTabProps> = ({formik}) => {
               selected={selectedDate}
               onChange={(date: Date | null) => {
                 setSelectedDate(date)
-                formik.setFieldValue('deliveryDate', date)
+                formik.setFieldValue('deliveryDate', date?.toDateString())
               }}
               className={clsx('form-control bg-transparent', {
                 'is-invalid': formik.touched['deliveryDate'] && formik.errors['deliveryDate'],
