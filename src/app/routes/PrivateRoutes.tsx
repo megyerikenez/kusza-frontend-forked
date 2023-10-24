@@ -5,9 +5,8 @@ import {MenuTestPage} from '../pages/MenuTestPage'
 import {lazy} from 'react'
 
 const PrivateRoutes = () => {
-  const CreateNewBid = lazy(() => import('../pages/administrator/CreateNewBid/CreateNewBidPage'))
   const ListAllBid = lazy(() => import('../pages/administrator/ListBids/ListAllBid'))
-
+  const CreateNewBid = lazy(() => import('../pages/administrator/CreateNewBid/CreateNewBidPage'))
   return (
     <Routes>
       <Route element={<MasterLayout />}>
@@ -17,9 +16,8 @@ const PrivateRoutes = () => {
         <Route path='dashboard' element={<DashboardWrapper />} />
         <Route path='menu-test' element={<MenuTestPage />} />
         {/* Lazy Modules */}
-        <Route path='administrator/createnewbid' element={<CreateNewBid />} />
+        <Route path='/administrator/createnewbid' element={<CreateNewBid />} />
         <Route path='/administrator/bids/all' element={<ListAllBid />} />
-
         <Route path='*' element={<Navigate to='/error/404' />} />
       </Route>
     </Routes>

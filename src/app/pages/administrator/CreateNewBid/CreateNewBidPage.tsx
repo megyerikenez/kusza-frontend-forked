@@ -1,17 +1,21 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {useFormik, FormikValues} from 'formik'
 import {Tab, Tabs} from 'react-bootstrap'
 import {initialValues, newBidSchema} from './helpers'
 import {BaseDataTab} from './tabs/BaseDataTab'
 import {ContractorDataTab} from './tabs/ContractorDataTab'
 import {OrganizationDataTab} from './tabs/OrganizationDataTab'
-import './styles/CreateNewBid.css' // Import the CSS file containing the customization
+import './styles/CreateNewBid.css'
 import {AddItems} from './tabs/AddItemsTab'
 import {PageTitle} from '../../../../_metronic/layout/core'
+import {getSupervisors} from '../../../modules/auth/core/requests'
+import {useDispatch} from 'react-redux'
+import {setSupervisors} from '../state/administratorSlice'
 
 type SelectCallback = (eventKey: string | null) => void
 
-export function NewBidForm() {
+function CreateNewBid() {
+  const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
   const [activeTab, setActiveTab] = useState('baseData')
 
@@ -38,6 +42,19 @@ export function NewBidForm() {
       setActiveTab(tab)
     }
   }
+
+  useEffect(() => {
+    const fetchSupervisors = async () => {
+      try {
+        const response = await getSupervisors()
+        dispatch(setSupervisors(response.data.result))
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    fetchSupervisors()
+  }, [dispatch])
 
   return (
     <>
@@ -78,4 +95,4 @@ export function NewBidForm() {
   )
 }
 
-export default NewBidForm
+export default CreateNewBid

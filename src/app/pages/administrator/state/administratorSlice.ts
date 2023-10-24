@@ -24,6 +24,6 @@ export const administratorSlice = createSlice({
   },
 })
 
-export const {setBids} = administratorSlice.actions
+export const {setBids, setSupervisors} = administratorSlice.actions
 
 export default administratorSlice.reducer
