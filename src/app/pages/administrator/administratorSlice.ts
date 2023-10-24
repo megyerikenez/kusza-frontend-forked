@@ -1,12 +1,14 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {INewBid} from './CreateNewBid/interfaces'
+import {INewBid, ISupervisor} from './CreateNewBid/interfaces'
 
 export interface IAdministratorState {
   bids: INewBid[]
+  supervisors: ISupervisor[]
 }
 
 const emptyState: IAdministratorState = {
   bids: [],
+  supervisors: [],
 }
 
 export const administratorSlice = createSlice({
@@ -15,6 +17,9 @@ export const administratorSlice = createSlice({
   reducers: {
     setBids: (state, action) => {
       state.bids = action.payload
+    },
+    setSupervisors: (state, action) => {
+      state.supervisors = action.payload
     },
   },
 })
