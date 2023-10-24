@@ -2,12 +2,16 @@ import React from 'react'
 import {useFormik} from 'formik'
 import clsx from 'clsx'
 import {initialValues} from '../helpers'
+import {useSelector} from 'react-redux'
+import {selectSupervisors} from '../../state/administratorSelector'
+import {ISupervisor} from '../interfaces'
 
 interface OrganizationDataTabProps {
   formik: ReturnType<typeof useFormik>
 }
 
 export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}) => {
+  const supervisors = useSelector(selectSupervisors)
   return (
     <div className={`card mt-8 mb-8`}>
       <div className='card-header border-0 pt-5'>
@@ -274,11 +278,10 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
 
         <div className='fv-row mb-8' key={initialValues.supervisor}>
           <label className='form-label fs-6 fw-bolder text-dark'>Felül vizsgáló</label>
-          <input
-            placeholder={'Supervisor'}
+          <select
             {...formik.getFieldProps('supervisor')}
             className={clsx(
-              'form-control bg-transparent',
+              'form-select bg-transparent',
               {
                 'is-invalid':
                   formik.touched['supervisor'] && formik.errors[initialValues.supervisor],
@@ -289,15 +292,21 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
                   !formik.errors[initialValues.supervisor],
               }
             )}
-            type='text'
-          />
+          >
+            <option value=''>Válasszon felülvizsgálót...</option>
+            {supervisors.map((supervisor: ISupervisor) => (
+              <option key={supervisor.id} value={supervisor.id}>
+                {supervisor.userName}
+              </option>
+            ))}
+          </select>
           {formik.touched.supervisor && formik.errors.supervisor && (
             <div className='fv-plugins-message-container'>
               <div className='fv-help-block'>
                 {typeof formik.errors.supervisor === 'string' ? (
                   <span role='alert'>{formik.errors.supervisor}</span>
                 ) : (
-                  <span role='alert'>An error occurred with the Supervisor field.</span>
+                  <span role='alert'>Hiba a felülvizsgáló kiválasztása közben.</span>
                 )}
               </div>
             </div>
