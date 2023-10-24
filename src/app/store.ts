@@ -1,7 +1,7 @@
 import {configureStore} from '@reduxjs/toolkit'
-import {authSlice} from './modules/auth/core/authSlice'
+import {authSlice} from './modules/auth/state/authSlice'
 import {itemSlice} from './pages/administrator/CreateNewBid/itemSlice'
-import {administratorSlice} from './pages/administrator/administratorSlice'
+import {administratorSlice} from './pages/administrator/state/administratorSlice'
 
 export const store = configureStore({
   reducer: {

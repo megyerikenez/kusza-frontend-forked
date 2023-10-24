@@ -4,7 +4,7 @@ import {ErrorsPage} from '../modules/errors/ErrorsPage'
 import {AuthPage} from '../modules/auth'
 import {App} from '../App'
 import {useSelector} from 'react-redux'
-import {isUserAuthenticated} from '../modules/auth/core/authSelector'
+import {isUserAuthenticated} from '../modules/auth/state/authSelector'
 import {PrivateRoutes} from './PrivateRoutes'
 
 const AppRoutes: FC = () => {

@@ -3,8 +3,8 @@ import {Link} from 'react-router-dom'
 import {toAbsoluteUrl} from '../../../helpers'
 import {Languages} from '../header-menus/Languages'
 import {useDispatch, useSelector} from 'react-redux'
-import {logoutUser} from '../../../../app/modules/auth/core/authSlice'
-import {userSelector} from '../../../../app/modules/auth/core/authSelector'
+import {logoutUser} from '../../../../app/modules/auth/state/authSlice'
+import {userSelector} from '../../../../app/modules/auth/state/authSelector'
 
 const UserMenu = () => {
   const dispatch = useDispatch()

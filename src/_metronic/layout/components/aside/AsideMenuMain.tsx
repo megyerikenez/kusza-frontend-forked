@@ -1,7 +1,7 @@
 import {AsideMenuItemWithSub} from './AsideMenuItemWithSub'
 import {AsideMenuItem} from './AsideMenuItem'
 import {useSelector} from 'react-redux'
-import {userRolesSelector} from '../../../../app/modules/auth/core/authSelector'
+import {userRolesSelector} from '../../../../app/modules/auth/state/authSelector'
 import {ADMINISTRATOR_ROLE} from '../../../helpers/roles'
 
 export function AsideMenuMain() {

@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {INewBid, ISupervisor} from './CreateNewBid/interfaces'
+import {INewBid, ISupervisor} from '../CreateNewBid/interfaces'
 
 export interface IAdministratorState {
   bids: INewBid[]

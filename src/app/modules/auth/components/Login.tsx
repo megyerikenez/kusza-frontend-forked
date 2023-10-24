@@ -7,9 +7,9 @@ import {useFormik} from 'formik'
 import {getUserBids, getUserDataByToken, login, setupAxiosAuthToken} from '../core/_requests'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {useDispatch} from 'react-redux'
-import {setUserData} from '../core/authSlice'
+import {setUserData} from '../state/authSlice'
 import axios from 'axios'
-import {setBids} from '../../../pages/administrator/administratorSlice'
+import {setBids} from '../../../pages/administrator/state/administratorSlice'
 
 const requiredMessage = 'Kötelező mező'
 const maxLength = 50

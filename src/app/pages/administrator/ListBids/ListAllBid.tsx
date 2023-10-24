@@ -1,5 +1,5 @@
 import {useSelector} from 'react-redux'
-import {selectBids} from '../administratorSelector'
+import {selectBids} from '../state/administratorSelector'
 import {INewBid} from '../CreateNewBid/interfaces'
 import {PageTitle} from '../../../../_metronic/layout/core'
 import {AccordionBodyWrapper} from './AccordionBody/AccordionBodyWrapper'
