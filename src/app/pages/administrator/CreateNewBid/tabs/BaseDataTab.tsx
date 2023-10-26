@@ -1,7 +1,7 @@
 import React from 'react'
 import {useFormik} from 'formik'
 import clsx from 'clsx'
-import {initialValues} from '../helpers'
+import {initialValues, generateFieldKey} from '../helpers'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
@@ -21,7 +21,7 @@ export const BaseDataTab: React.FC<BaseDataTabProps> = ({formik}) => {
       </div>
 
       <div className='card-body py-3'>
-        <div className='fv-row mb-8' key={initialValues.description}>
+        <div className='fv-row mb-8' key={generateFieldKey('description')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Leírás</label>
           <input
             placeholder={'description'}
@@ -52,7 +52,7 @@ export const BaseDataTab: React.FC<BaseDataTabProps> = ({formik}) => {
             </div>
           )}
         </div>
-        <div className='fv-row mb-8 mt-8' key={initialValues.deliveryNumber}>
+        <div className='fv-row mb-8 mt-8' key={generateFieldKey('deliveryNumber')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Azonositó kód</label>
           <input
             placeholder={'deliveryNumber'}
@@ -83,7 +83,7 @@ export const BaseDataTab: React.FC<BaseDataTabProps> = ({formik}) => {
             </div>
           )}
         </div>
-        <div className='fv-row mb-8' key={initialValues.deliveryDate}>
+        <div className='fv-row mb-8' key={generateFieldKey('deliveryDate')}>
           <label className='form-label fs-6 fw-bolder text-dark date'>Szállítás dátuma</label>
           <div>
             <DatePicker
@@ -109,7 +109,7 @@ export const BaseDataTab: React.FC<BaseDataTabProps> = ({formik}) => {
             )}
           </div>
         </div>
-        <div className='fv-row mb-8' key={initialValues.supplierRequester}>
+        <div className='fv-row mb-8' key={generateFieldKey('supplierRequester')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Beszerző</label>
           <input
             placeholder={'supplierRequester'}
@@ -141,7 +141,7 @@ export const BaseDataTab: React.FC<BaseDataTabProps> = ({formik}) => {
             </div>
           )}
         </div>
-        <div className='fv-row mb-8' key={initialValues.purchaserOrderNumber}>
+        <div className='fv-row mb-8' key={generateFieldKey('purchaserOrderNumber')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Vevői rendelés szám</label>
           <input
             placeholder={'purchaserOrderNumber'}

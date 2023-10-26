@@ -1,7 +1,7 @@
 import React from 'react'
 import {useFormik} from 'formik'
 import clsx from 'clsx'
-import {initialValues} from '../helpers'
+import {generateFieldKey, initialValues} from '../helpers'
 import {useSelector} from 'react-redux'
 import {selectSupervisors} from '../../state/administratorSelector'
 import {ISupervisor} from '../interfaces'
@@ -20,7 +20,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
         </h3>
       </div>
       <div className='card-body py-3'>
-        <div className='fv-row mb-8 mt-8' key={initialValues.confirmOrganizationUnit}>
+        <div className='fv-row mb-8 mt-8' key={generateFieldKey('confirmOrganizationUnit')}>
           <label className='form-label fs-6 fw-bolder text-dark'>
             Organizáció egység megerősitése
           </label>
@@ -57,7 +57,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
           )}
         </div>
 
-        <div className='fv-row mb-8' key={initialValues.paymentMethod}>
+        <div className='fv-row mb-8' key={generateFieldKey('paymentMethod')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Fizetési mód</label>
           <input
             placeholder={'Payment Method'}
@@ -88,7 +88,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
             </div>
           )}
         </div>
-        <div className='fv-row mb-8' key={initialValues.invoiceAddress}>
+        <div className='fv-row mb-8' key={generateFieldKey('invoiceAddress')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Számlázási cím</label>
           <input
             placeholder={'Invoice Address'}
@@ -120,7 +120,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
           )}
         </div>
 
-        <div className='fv-row mb-8' key={initialValues.year}>
+        <div className='fv-row mb-8' key={generateFieldKey('year')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Év</label>
           <input
             placeholder={'Year'}
@@ -150,7 +150,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
           )}
         </div>
 
-        <div className='fv-row mb-8' key={initialValues.faculty}>
+        <div className='fv-row mb-8' key={generateFieldKey('faculty')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Facilitás</label>
           <input
             placeholder={'Faculty'}
@@ -180,7 +180,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
           )}
         </div>
 
-        <div className='fv-row mb-8' key={initialValues.confirmationNumber}>
+        <div className='fv-row mb-8' key={generateFieldKey('confirmationNumber')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Megerősítő szám</label>
           <input
             placeholder={'Confirmation Number'}
@@ -213,7 +213,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
           )}
         </div>
 
-        <div className='fv-row mb-8' key={initialValues.category}>
+        <div className='fv-row mb-8' key={generateFieldKey('category')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Kategória</label>
           <input
             placeholder={'Category'}
@@ -243,7 +243,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
           )}
         </div>
 
-        <div className='fv-row mb-8' key={initialValues.offerDescription}>
+        <div className='fv-row mb-8' key={generateFieldKey('offerDescription')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Ajánlat leírása</label>
           <input
             placeholder={'Offer Description'}
@@ -276,7 +276,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
           )}
         </div>
 
-        <div className='fv-row mb-8' key={initialValues.supervisor}>
+        <div className='fv-row mb-8' key={generateFieldKey('supervisor')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Felül vizsgáló</label>
           <select
             {...formik.getFieldProps('supervisor')}
