@@ -25,16 +25,7 @@ export const initialValues = {
   category: '',
   offerDescription: '',
   supervisor: '',
-  orderConfirmationItems: [
-    {
-      itemNumber: '',
-      quantity: 0,
-      unit: 0,
-      description: '',
-      currency: 0,
-      netUnitPrice: 0,
-    },
-  ],
+  orderConfirmationItems: [{}],
 }
 
 export const addItem = (item: IOrderItems) => {
