@@ -37,6 +37,22 @@ function CreateNewBid() {
     },
   })
 
+  const onSave = async () => {
+    try {
+      setLoading(true)
+      console.log('Saving new bid data:', formik.values)
+      formik.resetForm()
+      setLoading(false)
+    } catch (error) {
+      console.error(error)
+      setLoading(false)
+    }
+  }
+
+  const onClear = () => {
+    formik.resetForm()
+  }
+
   const handleTabSelect: SelectCallback = (tab: string | null) => {
     if (tab) {
       setActiveTab(tab)
@@ -75,10 +91,41 @@ function CreateNewBid() {
             <AddItems formik={formik} />
           </Tab>
         </Tabs>
-        <div className='d-grid mb-10'>
+        <div className='d-flex justify-content-around'>
           <button
+            key='clearButton'
+            type='button'
+            onClick={onClear}
+            className='btn btn-danger w-25'
+            disabled={formik.isSubmitting}
+          >
+            {!loading && <span className='indicator-label'>Törlés</span>}
+            {loading && (
+              <span className='indicator-progress' style={{display: 'block'}}>
+                Kérem várjon
+                <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
+              </span>
+            )}
+          </button>
+          <button
+            key='saveButton'
+            type='button'
+            onClick={onSave}
+            className='btn btn-primary w-25'
+            disabled={formik.isSubmitting}
+          >
+            {!loading && <span className='indicator-label'>Mentés</span>}
+            {loading && (
+              <span className='indicator-progress' style={{display: 'block'}}>
+                Kérem várjon
+                <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
+              </span>
+            )}
+          </button>
+          <button
+            key='submitButton'
             type='submit'
-            className='btn btn-primary'
+            className='btn btn-success w-25'
             disabled={formik.isSubmitting || !formik.isValid}
           >
             {!loading && <span className='indicator-label'>Árajánlat létrehozása</span>}
