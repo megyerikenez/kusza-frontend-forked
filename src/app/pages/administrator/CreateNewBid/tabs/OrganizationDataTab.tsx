@@ -1,13 +1,17 @@
 import React from 'react'
 import {useFormik} from 'formik'
 import clsx from 'clsx'
-import {initialValues} from '../helpers'
+import {generateFieldKey, initialValues} from '../helpers'
+import {useSelector} from 'react-redux'
+import {selectSupervisors} from '../../state/administratorSelector'
+import {ISupervisor} from '../interfaces'
 
 interface OrganizationDataTabProps {
   formik: ReturnType<typeof useFormik>
 }
 
 export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}) => {
+  const supervisors = useSelector(selectSupervisors)
   return (
     <div className={`card mt-8 mb-8`}>
       <div className='card-header border-0 pt-5'>
@@ -16,7 +20,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
         </h3>
       </div>
       <div className='card-body py-3'>
-        <div className='fv-row mb-8 mt-8' key={initialValues.confirmOrganizationUnit}>
+        <div className='fv-row mb-8 mt-8' key={generateFieldKey('confirmOrganizationUnit')}>
           <label className='form-label fs-6 fw-bolder text-dark'>
             Organizáció egység megerősitése
           </label>
@@ -53,7 +57,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
           )}
         </div>
 
-        <div className='fv-row mb-8' key={initialValues.paymentMethod}>
+        <div className='fv-row mb-8' key={generateFieldKey('paymentMethod')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Fizetési mód</label>
           <input
             placeholder={'Payment Method'}
@@ -84,40 +88,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
             </div>
           )}
         </div>
-
-        <div className='fv-row mb-8' key={initialValues.deliveryDate}>
-          <label className='form-label fs-6 fw-bolder text-dark'>Szállítás dátuma</label>
-          <input
-            placeholder={'Delivery Date'}
-            {...formik.getFieldProps('deliveryDate')}
-            className={clsx(
-              'form-control bg-transparent',
-              {
-                'is-invalid':
-                  formik.touched['deliveryDate'] && formik.errors[initialValues.deliveryDate],
-              },
-              {
-                'is-valid':
-                  formik.touched[initialValues.deliveryDate] &&
-                  !formik.errors[initialValues.deliveryDate],
-              }
-            )}
-            type='text'
-          />
-          {formik.touched.deliveryDate && formik.errors.deliveryDate && (
-            <div className='fv-plugins-message-container'>
-              <div className='fv-help-block'>
-                {typeof formik.errors.deliveryDate === 'string' ? (
-                  <span role='alert'>{formik.errors.deliveryDate}</span>
-                ) : (
-                  <span role='alert'>An error occurred with the Delivery Date field.</span>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div className='fv-row mb-8' key={initialValues.invoiceAddress}>
+        <div className='fv-row mb-8' key={generateFieldKey('invoiceAddress')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Számlázási cím</label>
           <input
             placeholder={'Invoice Address'}
@@ -149,7 +120,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
           )}
         </div>
 
-        <div className='fv-row mb-8' key={initialValues.year}>
+        <div className='fv-row mb-8' key={generateFieldKey('year')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Év</label>
           <input
             placeholder={'Year'}
@@ -179,7 +150,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
           )}
         </div>
 
-        <div className='fv-row mb-8' key={initialValues.faculty}>
+        <div className='fv-row mb-8' key={generateFieldKey('faculty')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Facilitás</label>
           <input
             placeholder={'Faculty'}
@@ -209,7 +180,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
           )}
         </div>
 
-        <div className='fv-row mb-8' key={initialValues.confirmationNumber}>
+        <div className='fv-row mb-8' key={generateFieldKey('confirmationNumber')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Megerősítő szám</label>
           <input
             placeholder={'Confirmation Number'}
@@ -242,7 +213,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
           )}
         </div>
 
-        <div className='fv-row mb-8' key={initialValues.category}>
+        <div className='fv-row mb-8' key={generateFieldKey('category')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Kategória</label>
           <input
             placeholder={'Category'}
@@ -272,7 +243,7 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
           )}
         </div>
 
-        <div className='fv-row mb-8' key={initialValues.offerDescription}>
+        <div className='fv-row mb-8' key={generateFieldKey('offerDescription')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Ajánlat leírása</label>
           <input
             placeholder={'Offer Description'}
@@ -305,13 +276,12 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
           )}
         </div>
 
-        <div className='fv-row mb-8' key={initialValues.supervisor}>
+        <div className='fv-row mb-8' key={generateFieldKey('supervisor')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Felül vizsgáló</label>
-          <input
-            placeholder={'Supervisor'}
+          <select
             {...formik.getFieldProps('supervisor')}
             className={clsx(
-              'form-control bg-transparent',
+              'form-select bg-transparent',
               {
                 'is-invalid':
                   formik.touched['supervisor'] && formik.errors[initialValues.supervisor],
@@ -322,15 +292,21 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
                   !formik.errors[initialValues.supervisor],
               }
             )}
-            type='text'
-          />
+          >
+            <option value=''>Válasszon felülvizsgálót...</option>
+            {supervisors.map((supervisor: ISupervisor) => (
+              <option key={supervisor.id} value={supervisor.id}>
+                {supervisor.userName}
+              </option>
+            ))}
+          </select>
           {formik.touched.supervisor && formik.errors.supervisor && (
             <div className='fv-plugins-message-container'>
               <div className='fv-help-block'>
                 {typeof formik.errors.supervisor === 'string' ? (
                   <span role='alert'>{formik.errors.supervisor}</span>
                 ) : (
-                  <span role='alert'>An error occurred with the Supervisor field.</span>
+                  <span role='alert'>Hiba a felülvizsgáló kiválasztása közben.</span>
                 )}
               </div>
             </div>

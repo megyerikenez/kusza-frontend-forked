@@ -1,4 +1,4 @@
-import {Formik, Form, Field, ErrorMessage} from 'formik'
+import {Formik, Form, Field, ErrorMessage, useFormik, FormikValues} from 'formik'
 import {IOrderItems} from '../../../../app/pages/administrator/CreateNewBid/interfaces'
 import {KTIcon} from '../../../helpers'
 import {useDispatch} from 'react-redux'
@@ -6,7 +6,6 @@ import {addItem} from '../../../../app/pages/administrator/CreateNewBid/itemSlic
 
 export const AddItemModal = () => {
   const dispatch = useDispatch()
-
   const initialValues: IOrderItems = {
     itemNumber: '',
     quantity: 0,
@@ -16,10 +15,19 @@ export const AddItemModal = () => {
     netUnitPrice: 0,
   }
 
-  const handleSubmit = (values: IOrderItems) => {
-    console.log('values', values)
-    dispatch(addItem(values))
-  }
+  const formik = useFormik<FormikValues>({
+    initialValues,
+    onSubmit: (values, {setStatus, setSubmitting}) => {
+      try {
+        dispatch(addItem(values))
+        formik.resetForm()
+      } catch (error) {
+        console.error(error)
+        setStatus('Hibás adatok')
+        setSubmitting(false)
+      }
+    },
+  })
 
   return (
     <div className='modal fade' id='modal_add_item' aria-hidden='true'>
@@ -36,7 +44,19 @@ export const AddItemModal = () => {
               <h1 className='mb-3'>Termék adatai</h1>
             </div>
 
-            <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+            <Formik
+              initialValues={initialValues}
+              onSubmit={(values, {setStatus, setSubmitting}) => {
+                try {
+                  dispatch(addItem(values))
+                  formik.resetForm()
+                } catch (error) {
+                  console.error(error)
+                  setStatus('Hibás adatok')
+                  setSubmitting(false)
+                }
+              }}
+            >
               {() => (
                 <Form>
                   <div className='fv-row mb-10'>
@@ -88,6 +108,17 @@ export const AddItemModal = () => {
                       placeholder='Enter currency'
                     />
                     <ErrorMessage name='currency' component='div' className='fv-help-block' />
+                  </div>
+                  <div className='fv-row mb-10'>
+                    <label className='required fw-bold fs-6 mb-2'>Nettó egységár</label>
+                    <Field
+                      type='text'
+                      className='form-control form-control-solid'
+                      name='netUnitPrice'
+                      placeholder='Enter net unit price'
+                      readOnly
+                    />
+                    <ErrorMessage name='net' component='div' className='fv-help-block' />
                   </div>
                   <div className='text-center'>
                     <button type='submit' className='btn btn-primary' data-bs-dismiss='modal'>

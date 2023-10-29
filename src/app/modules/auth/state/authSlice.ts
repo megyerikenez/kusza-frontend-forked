@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {setupAxiosAuthToken} from './_requests'
+import {setupAxiosAuthToken} from '../core/requests'
 
 const emptyState = {
   userName: '',

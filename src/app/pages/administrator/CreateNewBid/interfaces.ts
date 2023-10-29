@@ -46,3 +46,10 @@ export interface INewBid {
   orderConfirmationItems: IOrderItems[]
   statusHistory: IBidHistory[]
 }
+
+export interface ISupervisor {
+  id: number
+  userName: string
+  organizationUnit: string
+  roles: string[]
+}

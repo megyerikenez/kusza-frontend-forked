@@ -1,6 +1,4 @@
 import {createRoot} from 'react-dom/client'
-// Axios
-import axios from 'axios'
 import {Chart, registerables} from 'chart.js'
 import {QueryClient, QueryClientProvider} from 'react-query'
 import {ReactQueryDevtools} from 'react-query/devtools'
@@ -18,7 +16,7 @@ import './_metronic/assets/keenicons/solid/style.css'
 import './_metronic/assets/sass/style.scss'
 import './_metronic/assets/sass/plugins.scss'
 import './_metronic/assets/sass/style.react.scss'
-import {AppRoutes} from './app/routing/AppRoutes'
+import {AppRoutes} from './app/routes/AppRoutes'
 import {Provider} from 'react-redux'
 import {store} from './app/store'
 /**

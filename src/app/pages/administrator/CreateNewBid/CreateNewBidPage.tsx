@@ -1,17 +1,21 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {useFormik, FormikValues} from 'formik'
 import {Tab, Tabs} from 'react-bootstrap'
 import {initialValues, newBidSchema} from './helpers'
 import {BaseDataTab} from './tabs/BaseDataTab'
 import {ContractorDataTab} from './tabs/ContractorDataTab'
 import {OrganizationDataTab} from './tabs/OrganizationDataTab'
-import './styles/CreateNewBid.css' // Import the CSS file containing the customization
+import './styles/CreateNewBid.css'
 import {AddItems} from './tabs/AddItemsTab'
 import {PageTitle} from '../../../../_metronic/layout/core'
+import {getSupervisors} from '../../../modules/auth/core/requests'
+import {useDispatch} from 'react-redux'
+import {setSupervisors} from '../state/administratorSlice'
 
 type SelectCallback = (eventKey: string | null) => void
 
-export function NewBidForm() {
+function CreateNewBid() {
+  const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
   const [activeTab, setActiveTab] = useState('baseData')
 
@@ -33,11 +37,40 @@ export function NewBidForm() {
     },
   })
 
+  const onSave = async () => {
+    try {
+      setLoading(true)
+      console.log('Saving new bid data:', formik.values)
+      formik.resetForm()
+      setLoading(false)
+    } catch (error) {
+      console.error(error)
+      setLoading(false)
+    }
+  }
+
+  const onClear = () => {
+    formik.resetForm()
+  }
+
   const handleTabSelect: SelectCallback = (tab: string | null) => {
     if (tab) {
       setActiveTab(tab)
     }
   }
+
+  useEffect(() => {
+    const fetchSupervisors = async () => {
+      try {
+        const response = await getSupervisors()
+        dispatch(setSupervisors(response.data.result))
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    fetchSupervisors()
+  }, [dispatch])
 
   return (
     <>
@@ -58,10 +91,41 @@ export function NewBidForm() {
             <AddItems formik={formik} />
           </Tab>
         </Tabs>
-        <div className='d-grid mb-10'>
+        <div className='d-flex justify-content-around'>
           <button
+            key='clearButton'
+            type='button'
+            onClick={onClear}
+            className='btn btn-danger w-25'
+            disabled={formik.isSubmitting}
+          >
+            {!loading && <span className='indicator-label'>Törlés</span>}
+            {loading && (
+              <span className='indicator-progress' style={{display: 'block'}}>
+                Kérem várjon
+                <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
+              </span>
+            )}
+          </button>
+          <button
+            key='saveButton'
+            type='button'
+            onClick={onSave}
+            className='btn btn-primary w-25'
+            disabled={formik.isSubmitting}
+          >
+            {!loading && <span className='indicator-label'>Mentés</span>}
+            {loading && (
+              <span className='indicator-progress' style={{display: 'block'}}>
+                Kérem várjon
+                <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
+              </span>
+            )}
+          </button>
+          <button
+            key='submitButton'
             type='submit'
-            className='btn btn-primary'
+            className='btn btn-success w-25'
             disabled={formik.isSubmitting || !formik.isValid}
           >
             {!loading && <span className='indicator-label'>Árajánlat létrehozása</span>}
@@ -78,4 +142,4 @@ export function NewBidForm() {
   )
 }
 
-export default NewBidForm
+export default CreateNewBid

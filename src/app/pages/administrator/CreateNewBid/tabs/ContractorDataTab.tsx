@@ -1,7 +1,7 @@
 import React from 'react'
 import {useFormik} from 'formik'
 import clsx from 'clsx'
-import {initialValues} from '../helpers'
+import {initialValues, generateFieldKey} from '../helpers'
 
 interface ContractorDataTabProps {
   formik: ReturnType<typeof useFormik>
@@ -16,7 +16,7 @@ export const ContractorDataTab: React.FC<ContractorDataTabProps> = ({formik}) =>
         </h3>
       </div>
       <div className='card-body py-3'>
-        <div className='fv-row mb-8 mt-8' key={initialValues.contractorName}>
+        <div className='fv-row mb-8 mt-8' key={generateFieldKey('contractorName')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Kontakt neve</label>
           <input
             placeholder={'contractorName'}
@@ -48,7 +48,7 @@ export const ContractorDataTab: React.FC<ContractorDataTabProps> = ({formik}) =>
           )}
         </div>
 
-        <div className='fv-row mb-8' key={initialValues.contractorDelegate}>
+        <div className='fv-row mb-8' key={generateFieldKey('contractorDelegate')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Organizáció</label>
           <input
             placeholder={'contractorDelegate'}
@@ -81,7 +81,7 @@ export const ContractorDataTab: React.FC<ContractorDataTabProps> = ({formik}) =>
           )}
         </div>
 
-        <div className='fv-row mb-8' key={initialValues.contractorSeat}>
+        <div className='fv-row mb-8' key={generateFieldKey('contractorSeat')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Telephely</label>
           <input
             placeholder={'contractorSeat'}
@@ -113,7 +113,7 @@ export const ContractorDataTab: React.FC<ContractorDataTabProps> = ({formik}) =>
           )}
         </div>
 
-        <div className='fv-row mb-8' key={initialValues.contractorTaxNumber}>
+        <div className='fv-row mb-8' key={generateFieldKey('contractorTaxNumber')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Adószám</label>
           <input
             placeholder={'contractorTaxNumber'}
@@ -146,7 +146,7 @@ export const ContractorDataTab: React.FC<ContractorDataTabProps> = ({formik}) =>
           )}
         </div>
 
-        <div className='fv-row mb-8' key={initialValues.contractorPhoneNumber}>
+        <div className='fv-row mb-8' key={generateFieldKey('contractorPhoneNumber')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Telefonszám</label>
           <input
             placeholder={'contractorPhoneNumber'}
@@ -179,7 +179,7 @@ export const ContractorDataTab: React.FC<ContractorDataTabProps> = ({formik}) =>
           )}
         </div>
 
-        <div className='fv-row mb-8' key={initialValues.contractorEmail}>
+        <div className='fv-row mb-8' key={generateFieldKey('contractorEmail')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Email cím</label>
           <input
             placeholder={'contractorEmail'}
@@ -211,7 +211,7 @@ export const ContractorDataTab: React.FC<ContractorDataTabProps> = ({formik}) =>
           )}
         </div>
 
-        <div className='fv-row mb-8' key={initialValues.contractorContact}>
+        <div className='fv-row mb-8' key={generateFieldKey('contractorContact')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Kontakt kontakt?????</label>
           <input
             placeholder={'contractorContact'}

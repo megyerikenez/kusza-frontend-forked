@@ -1,4 +1,3 @@
-import {ListsWidget5} from '../../../../../_metronic/partials/widgets'
 import {INewBid, IOrderItems} from '../../CreateNewBid/interfaces'
 import {BidHistory} from './BidHistory'
 

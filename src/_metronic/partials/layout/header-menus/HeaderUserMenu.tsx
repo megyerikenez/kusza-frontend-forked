@@ -4,8 +4,8 @@ import {Link} from 'react-router-dom'
 import {Languages} from './Languages'
 import {toAbsoluteUrl} from '../../../helpers'
 import {useDispatch, useSelector} from 'react-redux'
-import {logoutUser} from '../../../../app/modules/auth/core/authSlice'
-import {userSelector} from '../../../../app/modules/auth/core/authSelector'
+import {logoutUser} from '../../../../app/modules/auth/state/authSlice'
+import {userSelector} from '../../../../app/modules/auth/state/authSelector'
 
 const HeaderUserMenu: FC = () => {
   const dispatch = useDispatch()

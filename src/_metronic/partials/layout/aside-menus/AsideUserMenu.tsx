@@ -3,7 +3,7 @@ import {FC} from 'react'
 import {KTIcon, toAbsoluteUrl} from '../../../helpers'
 import {UserMenu} from '../user-menu/UserMenu'
 import {useSelector} from 'react-redux'
-import {userSelector} from '../../../../app/modules/auth/core/authSelector'
+import {userSelector} from '../../../../app/modules/auth/state/authSelector'
 
 const AsideUserMenu: FC = () => {
   const user = useSelector(userSelector)
