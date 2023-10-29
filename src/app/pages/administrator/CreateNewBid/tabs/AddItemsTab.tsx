@@ -47,7 +47,7 @@ export const AddItems: React.FC<AddItemsProps> = ({formik}) => {
         <h3 className='card-title align-items-start flex-column'>
           <span className='card-label fw-bold fs-3 mb-1'>Termék hozzáadása</span>
           <span className='text-muted mt-1 fw-semibold fs-7'>
-            Jelenlegi termékek: {currentItemsLength}
+            Jelenlegi termékek: {currentItemsLength - 1}
           </span>
         </h3>
         <div
@@ -101,44 +101,42 @@ export const AddItems: React.FC<AddItemsProps> = ({formik}) => {
             {/* begin::Table body */}
             <tbody>
               {formik.values['orderConfirmationItems'].map((item: IOrderItems) => {
-                return (
-                  <tr key={item.itemNumber}>
-                    <td>
-                      <div className='form-check form-check-sm form-check-custom form-check-solid'>
-                        <input
-                          className='form-check-input widget-9-check'
-                          type='checkbox'
-                          value='1'
-                        />
-                      </div>
-                    </td>
-                    <ItemTableData {...item} key={item.itemNumber} />
-                    <td>
-                      <div className='d-flex justify-content-end flex-shrink-0'>
-                        <a
-                          href='#'
-                          className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
-                        >
-                          <KTIcon iconName='pencil' className='fs-3' />
-                        </a>
-                        <a
-                          onClick={() => {
-                            formik.setFieldValue(
-                              'orderConfirmationItems',
-                              formik.values['orderConfirmationItems'].filter(
-                                (i: IOrderItems) => i.itemNumber !== item.itemNumber
+                if (item.itemNumber) {
+                  return (
+                    <tr key={item.itemNumber}>
+                      <td>
+                        <div className='form-check form-check-sm form-check-custom form-check-solid'>
+                          <input
+                            className='form-check-input widget-9-check'
+                            type='checkbox'
+                            value='1'
+                          />
+                        </div>
+                      </td>
+                      <ItemTableData {...item} key={item.itemNumber} />
+                      <td>
+                        <div className='d-flex justify-content-end flex-shrink-0'>
+                          <a
+                            onClick={() => {
+                              formik.setFieldValue(
+                                'orderConfirmationItems',
+                                formik.values['orderConfirmationItems'].filter(
+                                  (i: IOrderItems) => i.itemNumber !== item.itemNumber
+                                )
                               )
-                            )
-                            prevItemsRef.current = {...item}
-                          }}
-                          className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'
-                        >
-                          <KTIcon iconName='trash' className='fs-3' />
-                        </a>
-                      </div>
-                    </td>
-                  </tr>
-                )
+                              prevItemsRef.current = {...item}
+                            }}
+                            className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'
+                          >
+                            <KTIcon iconName='trash' className='fs-3' />
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                  )
+                } else {
+                  return null
+                }
               })}
             </tbody>
             {/* end::Table body */}
