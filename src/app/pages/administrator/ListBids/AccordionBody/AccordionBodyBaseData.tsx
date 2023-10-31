@@ -2,6 +2,7 @@ import {INewBid, IOrderItems} from '../../CreateNewBid/interfaces'
 import {BidHistory} from './BidHistory'
 
 export const AccordionBodyBaseData = (bid: INewBid) => {
+  const isoDateToLocal = new Date(bid.deliveryDate).toLocaleDateString('hu-HU')
   return (
     <>
       <div className='text-center'>
@@ -10,7 +11,6 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
             <tr className='fw-bold fs-5'>
               <th>Azonositó kód</th>
               <th>Leírás</th>
-              <th>Szállítás dátuma</th>
               <th>Beszerző</th>
               <th>Vevői rendelés szám</th>
             </tr>
@@ -19,7 +19,6 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
             <tr>
               <td>{bid.id}</td>
               <td>{bid.description}</td>
-              <td>{bid.deliveryDate}</td>
               <td>{bid.supplierRequester}</td>
               <td>{bid.purchaserOrderNumber}</td>
             </tr>
@@ -42,7 +41,7 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
             <tr>
               <td>{bid.contractor.name}</td>
               <td>{bid.contractor.delegate}</td>
-              <td>{bid.deliveryDate}</td>
+              <td>{bid.contractor.seat}</td>
               <td>{bid.contractor.taxNumber}</td>
               <td>{bid.contractor.phoneNumber}</td>
               <td>{bid.contractor.email}</td>
@@ -58,10 +57,6 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
               <th>Fizetési mód</th>
               <th>Szállítás dátuma</th>
               <th>Számlázási cím</th>
-              <th>Év</th>
-              <th>Megerősítő szám</th>
-              <th>Kategória</th>
-              <th>Ajánlat leírása</th>
               <th>Felül vizsgáló</th>
             </tr>
           </thead>
@@ -69,12 +64,8 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
             <tr>
               <td>{bid.confirmOrganizationUnit}</td>
               <td>{bid.paymentMethod}</td>
-              <td>{bid.deliveryDate}</td>
+              <td>{isoDateToLocal}</td>
               <td>{bid.invoiceAddress}</td>
-              <td>{bid.year}</td>
-              <td>{bid.confirmationNumber}</td>
-              <td>{bid.category}</td>
-              <td>{bid.offerDescription}</td>
               <td>{bid.supervisor}</td>
             </tr>
           </tbody>
@@ -92,18 +83,24 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
             </tr>
           </thead>
           <tbody>
-            {bid.orderConfirmationItems.map((item: IOrderItems) => {
-              return (
-                <tr key={item.itemNumber}>
-                  <td>{item.itemNumber}</td>
-                  <td>{item.quantity}</td>
-                  <td>{item.unit}</td>
-                  <td>{item.description}</td>
-                  <td>{item.currency}</td>
-                  <td>{item.netUnitPrice}</td>
-                </tr>
-              )
-            })}
+            {bid.orderConfirmationItems.length > 0 ? (
+              bid.orderConfirmationItems.map((item: IOrderItems) => {
+                return (
+                  <tr key={item.itemNumber}>
+                    <td>{item.itemNumber}</td>
+                    <td>{item.quantity}</td>
+                    <td>{item.unit}</td>
+                    <td>{item.description}</td>
+                    <td>{item.currency}</td>
+                    <td>{item.netUnitPrice}</td>
+                  </tr>
+                )
+              })
+            ) : (
+              <tr>
+                <td colSpan={6}>Nincs termék</td>
+              </tr>
+            )}
             <tr></tr>
           </tbody>
         </table>

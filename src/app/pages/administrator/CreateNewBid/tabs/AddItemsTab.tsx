@@ -47,7 +47,7 @@ export const AddItems: React.FC<AddItemsProps> = ({formik}) => {
         <h3 className='card-title align-items-start flex-column'>
           <span className='card-label fw-bold fs-3 mb-1'>Termék hozzáadása</span>
           <span className='text-muted mt-1 fw-semibold fs-7'>
-            Jelenlegi termékek: {currentItemsLength - 1}
+            Jelenlegi termékek: {currentItemsLength} db
           </span>
         </h3>
         <div
