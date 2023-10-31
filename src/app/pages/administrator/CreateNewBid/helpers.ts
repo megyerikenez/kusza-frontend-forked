@@ -25,7 +25,7 @@ export const initialValues = {
   category: '',
   offerDescription: '',
   supervisor: '',
-  orderConfirmationItems: [{}],
+  orderConfirmationItems: Array<IOrderItems>(),
 }
 
 export const addItem = (item: IOrderItems) => {
