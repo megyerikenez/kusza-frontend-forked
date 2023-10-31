@@ -32,7 +32,7 @@ export function AsideMenuMain() {
             <AsideMenuItem to='/crafted/account/settings' title='Elfogadott' hasBullet={true} />
             <AsideMenuItem to='/crafted/account/settings' title='Elutasitott' hasBullet={true} />
             <AsideMenuItem
-              to='/crafted/account/settings'
+              to='/administrator/bids/readytosign'
               title='Elfogadásra váró'
               hasBullet={true}
             />
