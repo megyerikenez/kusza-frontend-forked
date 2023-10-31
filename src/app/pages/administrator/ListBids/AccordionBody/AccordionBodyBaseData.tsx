@@ -58,10 +58,6 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
               <th>Fizetési mód</th>
               <th>Szállítás dátuma</th>
               <th>Számlázási cím</th>
-              <th>Év</th>
-              <th>Megerősítő szám</th>
-              <th>Kategória</th>
-              <th>Ajánlat leírása</th>
               <th>Felül vizsgáló</th>
             </tr>
           </thead>
@@ -71,10 +67,6 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
               <td>{bid.paymentMethod}</td>
               <td>{bid.deliveryDate}</td>
               <td>{bid.invoiceAddress}</td>
-              <td>{bid.year}</td>
-              <td>{bid.confirmationNumber}</td>
-              <td>{bid.category}</td>
-              <td>{bid.offerDescription}</td>
               <td>{bid.supervisor}</td>
             </tr>
           </tbody>
@@ -92,18 +84,24 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
             </tr>
           </thead>
           <tbody>
-            {bid.orderConfirmationItems.map((item: IOrderItems) => {
-              return (
-                <tr key={item.itemNumber}>
-                  <td>{item.itemNumber}</td>
-                  <td>{item.quantity}</td>
-                  <td>{item.unit}</td>
-                  <td>{item.description}</td>
-                  <td>{item.currency}</td>
-                  <td>{item.netUnitPrice}</td>
-                </tr>
-              )
-            })}
+            {bid.orderConfirmationItems.length > 0 ? (
+              bid.orderConfirmationItems.map((item: IOrderItems) => {
+                return (
+                  <tr key={item.itemNumber}>
+                    <td>{item.itemNumber}</td>
+                    <td>{item.quantity}</td>
+                    <td>{item.unit}</td>
+                    <td>{item.description}</td>
+                    <td>{item.currency}</td>
+                    <td>{item.netUnitPrice}</td>
+                  </tr>
+                )
+              })
+            ) : (
+              <tr>
+                <td colSpan={6}>Nincs termék</td>
+              </tr>
+            )}
             <tr></tr>
           </tbody>
         </table>
