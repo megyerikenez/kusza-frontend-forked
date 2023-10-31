@@ -37,7 +37,7 @@ export function AsideMenuMain() {
               hasBullet={true}
             />
             <AsideMenuItem
-              to='/crafted/account/settings'
+              to='/administrator/bids/neweditable'
               title='Szerkesztés alatt'
               hasBullet={true}
             />
