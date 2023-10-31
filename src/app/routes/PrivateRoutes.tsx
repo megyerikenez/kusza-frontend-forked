@@ -13,6 +13,8 @@ const PrivateRoutes = () => {
   const ListReadyToSignBid = lazy(
     () => import('../pages/administrator/ListBids/ListReadyToSignBid')
   )
+  const ListDeclinedBid = lazy(() => import('../pages/administrator/ListBids/ListDeclinedBid'))
+
   return (
     <Routes>
       <Route element={<MasterLayout />}>
@@ -26,6 +28,7 @@ const PrivateRoutes = () => {
         <Route path='/administrator/bids/all' element={<ListAllBid />} />
         <Route path='/administrator/bids/neweditable' element={<ListNewEditableBid />} />
         <Route path='/administrator/bids/readytosign' element={<ListReadyToSignBid />} />
+        <Route path='/administrator/bids/declined' element={<ListDeclinedBid />} />
         {/* 404 */}
         <Route path='*' element={<Navigate to='/error/404' />} />
       </Route>
