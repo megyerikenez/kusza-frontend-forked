@@ -41,6 +41,7 @@ export interface INewBid {
   supervisor: string
   orderConfirmationItems: IOrderItems[]
   statusHistory: IBidHistory[]
+  status: string
 }
 
 export interface ISupervisor {
