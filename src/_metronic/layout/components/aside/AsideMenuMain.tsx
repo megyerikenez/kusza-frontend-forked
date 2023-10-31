@@ -29,7 +29,11 @@ export function AsideMenuMain() {
             fontIcon='bi-person'
           >
             <AsideMenuItem to='/administrator/bids/all' title='Összes' hasBullet={true} />
-            <AsideMenuItem to='/crafted/account/settings' title='Elfogadott' hasBullet={true} />
+            <AsideMenuItem
+              to='/administrator/bids/supervisorsigned'
+              title='Elfogadott'
+              hasBullet={true}
+            />
             <AsideMenuItem to='/administrator/bids/declined' title='Elutasitott' hasBullet={true} />
             <AsideMenuItem
               to='/administrator/bids/readytosign'
