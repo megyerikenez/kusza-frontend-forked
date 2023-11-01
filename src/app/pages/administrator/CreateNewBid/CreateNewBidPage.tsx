@@ -11,7 +11,7 @@ import {PageTitle} from '../../../../_metronic/layout/core'
 import {getSupervisors} from '../../../modules/auth/core/requests'
 import {useDispatch} from 'react-redux'
 import {setSupervisors} from '../state/administratorSlice'
-import {saveEditableBid} from '../requests'
+import {postBid} from '../requests'
 type SelectCallback = (eventKey: string | null) => void
 
 function CreateNewBid() {
@@ -41,7 +41,7 @@ function CreateNewBid() {
     try {
       setLoading(true)
       console.log('Saving new bid data:', formik.values)
-      await saveEditableBid(formik.values)
+      await postBid(formik.values)
       formik.resetForm()
       setLoading(false)
     } catch (error) {

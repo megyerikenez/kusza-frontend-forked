@@ -9,7 +9,7 @@ export function getUserBids() {
   return axios.get(GET_BID_BY_USERID_URL)
 }
 
-export function saveEditableBid(data: any) {
+export function postBid(data: any) {
   return axios.post(POST_NEW_BID_URL, {
     deliveryNumber: data['deliveryNumber'],
     description: data['description'],
