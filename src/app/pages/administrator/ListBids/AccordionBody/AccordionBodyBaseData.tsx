@@ -108,6 +108,16 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
       <div className='d-flex align-items-center mt-1 fs-6 justify-content-center'>
         <BidHistory {...bid} />
       </div>
+      {bid.status === 'SupervisorSigned' && (
+        <div className='d-flex align-items-center mt-1 fs-6 justify-content-center'>
+          <button className='btn btn-primary'>Dokumentum letöltése</button>
+        </div>
+      )}
+      {bid.status === 'New' && (
+        <div className='d-flex align-items-center mt-1 fs-6 justify-content-center'>
+          <button className='btn btn-primary'>Szerkesztés</button>
+        </div>
+      )}
     </>
   )
 }

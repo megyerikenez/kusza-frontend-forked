@@ -3,6 +3,7 @@ import {selectBids} from '../state/administratorSelector'
 import {INewBid} from '../CreateNewBid/interfaces'
 import {PageTitle} from '../../../../_metronic/layout/core'
 import {AccordionBodyWrapper} from './AccordionBody/AccordionBodyWrapper'
+import {KTIcon} from '../../../../_metronic/helpers'
 
 export const ListSupervisorSignedBid = () => {
   const bids = useSelector(selectBids).filter((bid: INewBid) => bid.status === 'SupervisorSigned')
@@ -30,6 +31,7 @@ export const ListSupervisorSignedBid = () => {
                   <h3 className='fs-4 text-gray-800 fw-bold mb-0 ms-4'>
                     {bid.confirmOrganizationUnit}
                   </h3>
+                  <KTIcon iconName='cloud-download' className='ms-2 ' />
                 </button>
               </h2>
               <div

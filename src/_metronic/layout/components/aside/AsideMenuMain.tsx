@@ -31,13 +31,12 @@ export function AsideMenuMain() {
             <AsideMenuItem to='/administrator/bids/all' title='Összes' hasBullet={true} />
             <AsideMenuItem
               to='/administrator/bids/supervisorsigned'
-              title='Elfogadott'
+              title='Felülvizsgáló által aláírva'
               hasBullet={true}
             />
-            <AsideMenuItem to='/administrator/bids/declined' title='Elutasitott' hasBullet={true} />
             <AsideMenuItem
               to='/administrator/bids/readytosign'
-              title='Elfogadásra váró'
+              title='Felülvizsgáló által aláírásra vár'
               hasBullet={true}
             />
             <AsideMenuItem
@@ -46,6 +45,7 @@ export function AsideMenuMain() {
               hasBullet={true}
             />
           </AsideMenuItemWithSub>
+          <AsideMenuItem to='/administrator/bids/declined' title='Elutasitott' hasBullet={true} />
         </AsideMenuItemWithSub>
       )}
     </>
