@@ -10,7 +10,7 @@ export const ListDeclinedBid = () => {
 
   return (
     <>
-      <PageTitle>Árajánlatok</PageTitle>
+      <PageTitle>Megrendelések</PageTitle>
       <div className='accordion' id='kt_accordion_1'>
         {bids.map((bid: INewBid) => {
           const accordionId = `kt_accordion_1_item_${bid.id}`
