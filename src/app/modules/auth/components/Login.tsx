@@ -4,12 +4,12 @@ import * as Yup from 'yup'
 import clsx from 'clsx'
 import {Link} from 'react-router-dom'
 import {useFormik} from 'formik'
-import {getUserDataByToken, login, setupAxiosAuthToken} from '../core/requests'
+import {getPaymentMethods, getUserDataByToken, login, setupAxiosAuthToken} from '../core/requests'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {useDispatch} from 'react-redux'
 import {setUserData} from '../state/authSlice'
 import axios from 'axios'
-import {setBids} from '../../../pages/administrator/state/administratorSlice'
+import {setBids, setPaymentMethods} from '../../../pages/administrator/state/administratorSlice'
 import {getUserBids} from '../../../pages/administrator/requests'
 
 const requiredMessage = 'Kötelező mező'
@@ -33,12 +33,6 @@ const initialValues = {
   password: 'qwedsa123',
 }
 
-/*
-  Formik+YUP+Typescript:
-  https://jaredpalmer.com/formik/docs/tutorial#getfieldprops
-  https://medium.com/@maurice.de.beijer/yup-validation-and-typescript-and-formik-6c342578a20e
-*/
-
 export function Login() {
   const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
@@ -61,6 +55,8 @@ export function Login() {
         )
         const bids = await getUserBids()
         dispatch(setBids(bids.data.result))
+        const paymentMethods = await getPaymentMethods()
+        dispatch(setPaymentMethods(paymentMethods.data.result))
       } catch (error) {
         console.error(error)
         setStatus('Hibás bejelentkezési adatok')

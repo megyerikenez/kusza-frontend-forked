@@ -10,3 +10,8 @@ export const selectSupervisors = createSelector(
   (state: RootState) => state.administrator.supervisors,
   (supervisors) => supervisors
 )
+
+export const selectPaymentMethods = createSelector(
+  (state: RootState) => state.administrator.paymentMethods,
+  (paymentMethods) => paymentMethods
+)

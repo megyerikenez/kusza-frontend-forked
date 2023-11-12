@@ -3,7 +3,7 @@ import {useFormik} from 'formik'
 import clsx from 'clsx'
 import {generateFieldKey, initialValues} from '../helpers'
 import {useSelector} from 'react-redux'
-import {selectSupervisors} from '../../state/administratorSelector'
+import {selectPaymentMethods, selectSupervisors} from '../../state/administratorSelector'
 import {ISupervisor} from '../interfaces'
 
 interface OrganizationDataTabProps {
@@ -11,6 +11,8 @@ interface OrganizationDataTabProps {
 }
 
 export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}) => {
+  const paymentMethods = useSelector(selectPaymentMethods)
+
   const supervisors = useSelector(selectSupervisors)
   return (
     <div className={`card mt-8 mb-8`}>
@@ -59,11 +61,10 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
 
         <div className='fv-row mb-8' key={generateFieldKey('paymentMethod')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Fizetési mód</label>
-          <input
-            placeholder={'Payment Method'}
+          <select
             {...formik.getFieldProps('paymentMethod')}
             className={clsx(
-              'form-control bg-transparent',
+              'form-select bg-transparent',
               {
                 'is-invalid':
                   formik.touched['paymentMethod'] && formik.errors[initialValues.paymentMethod],
@@ -74,8 +75,14 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
                   !formik.errors[initialValues.paymentMethod],
               }
             )}
-            type='text'
-          />
+          >
+            <option value=''>Válasszon fizetési módot...</option>
+            {paymentMethods.map((paymentMethod) => (
+              <option key={paymentMethod} value={paymentMethod}>
+                {paymentMethod}
+              </option>
+            ))}
+          </select>
           {formik.touched.paymentMethod && formik.errors.paymentMethod && (
             <div className='fv-plugins-message-container'>
               <div className='fv-help-block'>
