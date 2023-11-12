@@ -46,7 +46,7 @@ export const StatWidget3: FC<Props> = ({className, backGroundColor, bids}) => {
               {/*begin::Title*/}
               <div>
                 <div className='fs-5 text-dark fw-bolder lh-1'>{lengthOfBid} db</div>
-                <div className='fs-7 text-gray-600 fw-bold'>Összes árajánlatom</div>
+                <div className='fs-7 text-gray-600 fw-bold'>Összes megrendelésem</div>
               </div>
               {/*end::Title*/}
             </div>

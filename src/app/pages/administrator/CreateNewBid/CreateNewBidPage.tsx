@@ -84,7 +84,7 @@ function CreateNewBid() {
 
   return (
     <>
-      <PageTitle>Új árajánlat létrehozása</PageTitle>
+      <PageTitle>Új megrendelés létrehozása</PageTitle>
 
       <form className='form w-100' onSubmit={formik.handleSubmit} noValidate id='new_bid_form'>
         <Tabs activeKey={activeTab} onSelect={handleTabSelect} id='bidTabs'>
@@ -138,7 +138,7 @@ function CreateNewBid() {
             className='btn btn-success w-25'
             disabled={formik.isSubmitting || !formik.isValid}
           >
-            {!loading && <span className='indicator-label'>Árajánlat létrehozása</span>}
+            {!loading && <span className='indicator-label'>Megrendelés létrehozása</span>}
             {loading && (
               <span className='indicator-progress' style={{display: 'block'}}>
                 Kérem várjon

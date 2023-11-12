@@ -17,14 +17,14 @@ export function AsideMenuMain() {
       {userRole.includes(ADMINISTRATOR_ROLE) && (
         <AsideMenuItemWithSub
           to='/crafted/pages'
-          title='Árajánlatok'
+          title='Megrendelések'
           fontIcon='bi-archive'
           icon='black-right'
         >
-          <AsideMenuItem to='/administrator/createnewbid' title='Új árajánlat' hasBullet={true} />
+          <AsideMenuItem to='/administrator/createnewbid' title='Új megrendelés' hasBullet={true} />
           <AsideMenuItemWithSub
             to='/crafted/accounts'
-            title='Árajánlataim'
+            title='Megrendelések'
             icon='black-right'
             fontIcon='bi-person'
           >
@@ -44,8 +44,8 @@ export function AsideMenuMain() {
               title='Szerkesztés alatt'
               hasBullet={true}
             />
+            <AsideMenuItem to='/administrator/bids/declined' title='Elutasitott' hasBullet={true} />
           </AsideMenuItemWithSub>
-          <AsideMenuItem to='/administrator/bids/declined' title='Elutasitott' hasBullet={true} />
         </AsideMenuItemWithSub>
       )}
     </>
