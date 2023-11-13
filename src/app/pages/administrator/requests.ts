@@ -4,7 +4,7 @@ const API_URL = process.env.REACT_APP_API_URL
 
 export const GET_BID_BY_USERID_URL = `${API_URL}/orderconfirmation/getbyuserid`
 export const POST_NEW_BID_URL = `${API_URL}/orderconfirmation/create`
-export const PUT_NEXT_STATUS_URL = `${API_URL}/orderconfirmation/nextstatus`
+export const PUT_NEXT_STATUS_URL = `${API_URL}/orderconfirmation/movetonextstatus`
 
 export function getUserBids() {
   return axios.get(GET_BID_BY_USERID_URL)
