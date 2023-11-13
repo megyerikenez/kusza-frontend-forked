@@ -55,7 +55,7 @@ export const BidHistory = (bid: INewBid) => {
               {/* begin::Text */}
               {status.toStatus === NEW_STRING_FLAG && (
                 <div className='fw-mormal timeline-content text-muted ps-3'>
-                  Új árajánlat létrehozva
+                  Új megrendelés létrehozva
                 </div>
               )}
               {status.toStatus === READY_TO_SIGN_STRING_FLAG && (
@@ -63,7 +63,7 @@ export const BidHistory = (bid: INewBid) => {
               )}
               {status.toStatus === SUPERVISOR_SIGNED_STRING_FLAG && (
                 <div className='fw-mormal timeline-content text-muted ps-3'>
-                  Felülvizsgáló aláírta az árajánlatot
+                  Felülvizsgáló aláírta a megrendelés
                 </div>
               )}
               {/* end::Text */}

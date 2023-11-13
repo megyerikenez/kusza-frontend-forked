@@ -18,7 +18,7 @@ export function MenuInner() {
       >
         {/* PAGES */}
         <MenuInnerWithSub
-          title='Árajánlatok'
+          title='Megrendelések'
           to='/crafted/pages'
           fontIcon='bi-archive'
           hasArrow={true}

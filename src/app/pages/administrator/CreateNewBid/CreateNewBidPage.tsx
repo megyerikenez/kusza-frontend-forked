@@ -12,6 +12,8 @@ import {getSupervisors} from '../../../modules/auth/core/requests'
 import {useDispatch} from 'react-redux'
 import {setSupervisors} from '../state/administratorSlice'
 import {postBid, nextStatus} from '../requests'
+import {useSelector} from 'react-redux/es/hooks/useSelector'
+import {selectData, selectIsEditing} from './editSelector'
 type SelectCallback = (eventKey: string | null) => void
 
 function CreateNewBid() {
@@ -19,8 +21,12 @@ function CreateNewBid() {
   const [loading, setLoading] = useState(false)
   const [activeTab, setActiveTab] = useState('baseData')
 
+  const isEditing = useSelector(selectIsEditing)
+  const data = useSelector(selectData)
+  const values = isEditing ? data : initialValues
+
   const formik = useFormik<FormikValues>({
-    initialValues,
+    initialValues: values,
     validationSchema: newBidSchema,
     onSubmit: async (values, {setStatus, setSubmitting}) => {
       setLoading(true)
@@ -28,7 +34,7 @@ function CreateNewBid() {
         console.log('Submitting new bid data:', values)
         const response = await postBid(formik.values)
         const bidId = response.data.result['id']
-        nextStatus(bidId)
+        await nextStatus(bidId)
         formik.resetForm()
         setLoading(false)
       } catch (error) {
@@ -78,7 +84,7 @@ function CreateNewBid() {
 
   return (
     <>
-      <PageTitle>Új árajánlat létrehozása</PageTitle>
+      <PageTitle>Új megrendelés létrehozása</PageTitle>
 
       <form className='form w-100' onSubmit={formik.handleSubmit} noValidate id='new_bid_form'>
         <Tabs activeKey={activeTab} onSelect={handleTabSelect} id='bidTabs'>
@@ -132,7 +138,7 @@ function CreateNewBid() {
             className='btn btn-success w-25'
             disabled={formik.isSubmitting || !formik.isValid}
           >
-            {!loading && <span className='indicator-label'>Árajánlat létrehozása</span>}
+            {!loading && <span className='indicator-label'>Megrendelés létrehozása</span>}
             {loading && (
               <span className='indicator-progress' style={{display: 'block'}}>
                 Kérem várjon

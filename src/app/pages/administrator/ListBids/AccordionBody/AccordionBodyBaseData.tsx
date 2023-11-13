@@ -1,7 +1,15 @@
+import {useDispatch} from 'react-redux'
 import {INewBid, IOrderItems} from '../../CreateNewBid/interfaces'
 import {BidHistory} from './BidHistory'
+import {setData, setIsEditing} from '../../CreateNewBid/editSlice'
+import {Link} from 'react-router-dom'
 
 export const AccordionBodyBaseData = (bid: INewBid) => {
+  const dispatch = useDispatch()
+  const onEdit = () => {
+    dispatch(setIsEditing(true))
+    dispatch(setData(bid))
+  }
   const isoDateToLocal = new Date(bid.deliveryDate).toLocaleDateString('hu-HU')
   return (
     <>
@@ -108,6 +116,20 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
       <div className='d-flex align-items-center mt-1 fs-6 justify-content-center'>
         <BidHistory {...bid} />
       </div>
+      {bid.status === 'SupervisorSigned' && (
+        <div className='d-flex align-items-center mt-1 fs-6 justify-content-center'>
+          <button className='btn btn-primary'>Dokumentum letöltése</button>
+        </div>
+      )}
+      {bid.status === 'New' && (
+        <div className='d-flex align-items-center mt-1 fs-6 justify-content-center'>
+          <Link to={'/administrator/createnewbid'}>
+            <button onClick={onEdit} className='btn btn-primary'>
+              Szerkesztés
+            </button>
+          </Link>
+        </div>
+      )}
     </>
   )
 }
