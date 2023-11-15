@@ -7,6 +7,9 @@ import {userRolesSelector} from '../modules/auth/state/authSelector'
 import {useSelector} from 'react-redux'
 import {ADMINISTRATOR_ROLE, SUPERVISOR_ROLE} from '../../_metronic/helpers/roles'
 import SupervisorBids from '../pages/supervisor/Bids/Bids'
+import SupervisorDeclinedBids from '../pages/supervisor/Bids/SupervisorDeclinedBids'
+import SupervisorWaitingForSignBids from '../pages/supervisor/Bids/SupervisorWaitingForSignBids'
+import SupervisorSignedBids from '../pages/supervisor/Bids/SupervisorSignedBids'
 
 const PrivateRoutes = () => {
   const userRoles: string[] = useSelector(userRolesSelector)
@@ -49,7 +52,12 @@ const PrivateRoutes = () => {
         )}
         {/* Supervisor */}
         {userRoles.includes(SUPERVISOR_ROLE) && (
-          <Route path='/supervisor/bids/all' element={<SupervisorBids />} />
+          <>
+            <Route path='/supervisor/bids/all' element={<SupervisorBids />} />
+            <Route path='/supervisor/bids/waiting' element={<SupervisorWaitingForSignBids />} />
+            <Route path='/supervisor/bids/signed' element={<SupervisorSignedBids />} />
+            <Route path='/supervisor/bids/declined' element={<SupervisorDeclinedBids />} />
+          </>
         )}
         {/* Redirect */}
         {/* 404 */}
