@@ -6,8 +6,9 @@ import {AccordionBodyWrapper} from '../../administrator/ListBids/AccordionBody/A
 
 export const SupervisorWaitingForSignBids = () => {
   const bids = useSelector(selectSupervisorBids).filter(
-    (bid: INewBid) => bid.status === 'SupervisorSigned'
+    (bid: INewBid) => bid.status === 'ReadyToSign'
   )
+
   return (
     <>
       <PageTitle>Megrendelések</PageTitle>
