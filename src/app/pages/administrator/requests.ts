@@ -2,9 +2,10 @@ import axios from 'axios'
 
 const API_URL = process.env.REACT_APP_API_URL
 
+export const GET_ALL_BIDS = `${API_URL}/orderconfirmation/getall`
 export const GET_BID_BY_USERID_URL = `${API_URL}/orderconfirmation/getbyuserid`
 export const POST_NEW_BID_URL = `${API_URL}/orderconfirmation/create`
-export const PUT_NEXT_STATUS_URL = `${API_URL}/orderconfirmation/movetonextstatus`
+export const PUT_NEXT_STATUS_URL = `${API_URL}/orderconfirmation/movetomovetonextstatus`
 export const DELETE_BID_URL = `${API_URL}/orderconfirmation/delete`
 
 export function getUserBids() {
