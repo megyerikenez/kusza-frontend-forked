@@ -4,6 +4,7 @@ import {BidHistory} from './BidHistory'
 import {setData, setIsEditing} from '../../CreateNewBid/editSlice'
 import {Link} from 'react-router-dom'
 import {userRolesSelector} from '../../../../modules/auth/state/authSelector'
+import {declineBid, nextStatus} from '../../../supervisor/requests'
 import {selectSupervisors} from '../../state/administratorSelector'
 
 export const AccordionBodyBaseData = (bid: INewBid) => {
@@ -13,6 +14,19 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
     dispatch(setIsEditing(true))
     dispatch(setData(bid))
   }
+
+  const onDownload = () => {
+    console.log('download')
+  }
+
+  const onDecline = () => {
+    declineBid(bid.id, 'nemjo')
+  }
+
+  const onSign = async () => {
+    await nextStatus(bid.id)
+  }
+
   const isoDateToLocal = new Date(bid.deliveryDate).toLocaleDateString('hu-HU')
   const supervisors = useSelector(selectSupervisors)
 
@@ -136,18 +150,20 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
         )}
         {bid.status === 'ReadyToSign' && userRoles.includes('Supervisor') && (
           <div className='d-flex flex-column justify-content-around'>
-            <button type='button' className='btn btn-danger mb-2 w-10'>
+            <button onClick={() => onDecline} type='button' className='btn btn-danger mb-2 w-10'>
               <span className='indicator-label'>Elutasitás</span>
             </button>
-            <button onClick={() => console.log(bid)} type='button' className='btn btn-primary w-10'>
-              <span className='indicator-label'>Aláírás</span>
+            <button onClick={() => onSign()} type='button' className='btn btn-primary w-10'>
+              <span className='indicator-label'>Elfogadás</span>
             </button>
           </div>
         )}
 
         {bid.status === 'SupervisorSigned' && (
           <div className='d-flex align-items-center mt-1 fs-6 justify-content-center'>
-            <button className='btn btn-primary'>Dokumentum letöltése</button>
+            <button onClick={() => onDownload} className='btn btn-primary'>
+              Dokumentum letöltése
+            </button>
           </div>
         )}
       </div>
