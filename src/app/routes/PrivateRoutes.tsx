@@ -49,7 +49,7 @@ const PrivateRoutes = () => {
         )}
         {/* Supervisor */}
         {userRoles.includes(SUPERVISOR_ROLE) && (
-          <Route path='/supervisor/bids' element={<SupervisorBids />} />
+          <Route path='/supervisor/bids/all' element={<SupervisorBids />} />
         )}
         {/* Redirect */}
         {/* 404 */}

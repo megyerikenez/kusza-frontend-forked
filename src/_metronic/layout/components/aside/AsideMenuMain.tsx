@@ -49,7 +49,12 @@ export function AsideMenuMain() {
         </AsideMenuItemWithSub>
       )}
       {userRole.includes(SUPERVISOR_ROLE) && (
-        <AsideMenuItem to='/supervisor/bids' title='Megrendelések' hasBullet={true} />
+        <AsideMenuItemWithSub to='/supervisor/bids' title='Megrendelések' hasBullet={true}>
+          <AsideMenuItem to='/supervisor/bids/all' title='Összes megrendelés' hasBullet={true} />
+          <AsideMenuItem to='/supervisor/bids/waiting' title='Aláírásra vár' hasBullet={true} />
+          <AsideMenuItem to='/supervisor/bids/signed' title='Aláírt' hasBullet={true} />
+          <AsideMenuItem to='/supervisor/bids/declined' title='Elutasított' hasBullet={true} />
+        </AsideMenuItemWithSub>
       )}
     </>
   )
