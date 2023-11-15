@@ -11,7 +11,6 @@ export const BidHistory = (bid: INewBid) => {
       <div className='card-header align-items-center border-0 mt-4'>
         <h3 className='card-title align-items-start flex-column'>
           <span className='fw-bold mb-2 text-dark'>Előzmények</span>
-          <span className='text-muted fw-semibold fs-7'>890,344 Sales</span>
         </h3>
       </div>
       {/* end::Header */}
@@ -63,7 +62,7 @@ export const BidHistory = (bid: INewBid) => {
               )}
               {status.toStatus === SUPERVISOR_SIGNED_STRING_FLAG && (
                 <div className='fw-mormal timeline-content text-muted ps-3'>
-                  Felülvizsgáló aláírta a megrendelés
+                  Felülvizsgáló aláírta a megrendelést
                 </div>
               )}
               {/* end::Text */}
