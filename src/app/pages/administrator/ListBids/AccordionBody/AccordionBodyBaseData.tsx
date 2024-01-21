@@ -1,8 +1,9 @@
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {INewBid, IOrderItems} from '../../CreateNewBid/interfaces'
 import {BidHistory} from './BidHistory'
 import {setData, setIsEditing} from '../../CreateNewBid/editSlice'
 import {Link} from 'react-router-dom'
+import {selectSupervisors} from '../../state/administratorSelector'
 
 export const AccordionBodyBaseData = (bid: INewBid) => {
   const dispatch = useDispatch()
@@ -11,6 +12,13 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
     dispatch(setData(bid))
   }
   const isoDateToLocal = new Date(bid.deliveryDate).toLocaleDateString('hu-HU')
+  const supervisors = useSelector(selectSupervisors)
+
+  const findSupervisorNameById = (supervisorId: any) => {
+    const supervisor = supervisors.find((s) => s.id === supervisorId)
+    return supervisor ? supervisor.userName : 'Unknown Supervisor'
+  }
+
   return (
     <>
       <div className='text-center'>
@@ -74,7 +82,7 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
               <td>{bid.paymentMethod}</td>
               <td>{isoDateToLocal}</td>
               <td>{bid.invoiceAddress}</td>
-              <td>{bid.supervisor}</td>
+              <td>{findSupervisorNameById(bid.supervisorUserId)}</td>
             </tr>
           </tbody>
         </table>

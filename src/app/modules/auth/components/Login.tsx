@@ -4,12 +4,22 @@ import * as Yup from 'yup'
 import clsx from 'clsx'
 import {Link} from 'react-router-dom'
 import {useFormik} from 'formik'
-import {getPaymentMethods, getUserDataByToken, login, setupAxiosAuthToken} from '../core/requests'
+import {
+  getPaymentMethods,
+  getSupervisors,
+  getUserDataByToken,
+  login,
+  setupAxiosAuthToken,
+} from '../core/requests'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {useDispatch} from 'react-redux'
 import {setUserData} from '../state/authSlice'
 import axios from 'axios'
-import {setBids, setPaymentMethods} from '../../../pages/administrator/state/administratorSlice'
+import {
+  setBids,
+  setPaymentMethods,
+  setSupervisors,
+} from '../../../pages/administrator/state/administratorSlice'
 import {getUserBids} from '../../../pages/administrator/requests'
 
 const requiredMessage = 'Kötelező mező'
@@ -57,6 +67,8 @@ export function Login() {
         dispatch(setBids(bids.data.result))
         const paymentMethods = await getPaymentMethods()
         dispatch(setPaymentMethods(paymentMethods.data.result))
+        const supervisors = await getSupervisors()
+        dispatch(setSupervisors(supervisors.data.result))
       } catch (error) {
         console.error(error)
         setStatus('Hibás bejelentkezési adatok')
