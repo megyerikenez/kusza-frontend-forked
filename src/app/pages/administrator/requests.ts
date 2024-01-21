@@ -26,10 +26,20 @@ export function postBid(data: any) {
     },
     ContractorContact: data['contractorContact'],
     ConfirmOrganizationUnit: data['confirmOrganizationUnit'],
-    PaymentMethod: 1,
-    DeliveryDate: '2023-10-29',
+    PaymentMethod: 'Cash',
+    DeliveryDate: data['deliveryDate'],
     InvoiceAddress: data['invoiceAddress'],
-    OrderConfirmationItems: data['orderConfirmationItems'],
+    OrderConfirmationItems: [
+      {
+        itemNumber: 'F4100',
+        quantity: 1,
+        unit: 1,
+        description: 'asdf',
+        currency: 1,
+        netUnitPrice: 10,
+      },
+    ],
+    SupervisorUserId: data['supervisor'],
   })
 }
 
