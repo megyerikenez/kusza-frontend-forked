@@ -37,7 +37,7 @@ export interface INewBid {
   paymentMethod: number
   deliveryDate: string
   invoiceAddress: string
-  supervisor: string
+  supervisorUserId: string
   orderConfirmationItems: IOrderItems[]
   statusHistory: IBidHistory[]
   status: string

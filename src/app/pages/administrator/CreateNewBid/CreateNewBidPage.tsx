@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import {useFormik, FormikValues} from 'formik'
 import {Tab, Tabs} from 'react-bootstrap'
 import {initialValues, newBidSchema} from './helpers'
@@ -8,9 +8,8 @@ import {OrganizationDataTab} from './tabs/OrganizationDataTab'
 import './styles/CreateNewBid.css'
 import {AddItems} from './tabs/AddItemsTab'
 import {PageTitle} from '../../../../_metronic/layout/core'
-import {getSupervisors} from '../../../modules/auth/core/requests'
 import {useDispatch} from 'react-redux'
-import {deleteBidFromState, setSupervisors} from '../state/administratorSlice'
+import {deleteBidFromState} from '../state/administratorSlice'
 import {postBid, nextStatus, deleteBid} from '../requests'
 import {useSelector} from 'react-redux/es/hooks/useSelector'
 import {selectData, selectIsEditing} from './editSelector'
@@ -81,19 +80,6 @@ function CreateNewBid() {
       setActiveTab(tab)
     }
   }
-
-  useEffect(() => {
-    const fetchSupervisors = async () => {
-      try {
-        const response = await getSupervisors()
-        dispatch(setSupervisors(response.data.result))
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    fetchSupervisors()
-  }, [dispatch])
 
   return (
     <>
