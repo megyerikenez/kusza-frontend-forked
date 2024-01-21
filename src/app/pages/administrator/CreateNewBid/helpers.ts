@@ -20,7 +20,6 @@ export const initialValues = {
   deliveryDate: '',
   invoiceAddress: '',
   year: '',
-  faculty: '',
   confirmationNumber: '',
   category: '',
   offerDescription: '',
@@ -56,7 +55,6 @@ export const newBidSchema = Yup.object().shape({
   paymentMethod: Yup.string().max(MAX_LENGTH, MAX_LENGTH_MESSAGE).required(REQUIRED_MESSAGE),
   deliveryDate: Yup.date().required(REQUIRED_MESSAGE),
   invoiceAddress: Yup.string().max(MAX_LENGTH, MAX_LENGTH_MESSAGE).required(REQUIRED_MESSAGE),
-  faculty: Yup.string().max(MAX_LENGTH, MAX_LENGTH_MESSAGE).required(REQUIRED_MESSAGE),
   supervisor: Yup.string().max(MAX_LENGTH, MAX_LENGTH_MESSAGE).required(REQUIRED_MESSAGE),
   orderConfirmationItems: Yup.array().of(
     Yup.object().shape({

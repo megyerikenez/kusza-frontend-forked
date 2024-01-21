@@ -21,7 +21,6 @@ const emptyState = {
     deliveryDate: '',
     invoiceAddress: '',
     year: '',
-    faculty: '',
     confirmationNumber: '',
     category: '',
     offerDescription: '',
@@ -55,7 +54,6 @@ export const editSlice = createSlice({
       state.data.deliveryDate = action.payload.deliveryDate
       state.data.invoiceAddress = action.payload.invoiceAddress
       state.data.year = action.payload.year
-      state.data.faculty = action.payload.faculty
       state.data.confirmationNumber = action.payload.confirmationNumber
       state.data.category = action.payload.category
       state.data.offerDescription = action.payload.offerDescription

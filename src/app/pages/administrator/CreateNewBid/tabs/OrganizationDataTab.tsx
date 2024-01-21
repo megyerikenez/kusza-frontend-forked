@@ -126,36 +126,6 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
             </div>
           )}
         </div>
-
-        <div className='fv-row mb-8' key={generateFieldKey('faculty')}>
-          <label className='form-label fs-6 fw-bolder text-dark'>Facilitás</label>
-          <input
-            placeholder={'Faculty'}
-            {...formik.getFieldProps('faculty')}
-            className={clsx(
-              'form-control bg-transparent',
-              {
-                'is-invalid': formik.touched['faculty'] && formik.errors[initialValues.faculty],
-              },
-              {
-                'is-valid':
-                  formik.touched[initialValues.faculty] && !formik.errors[initialValues.faculty],
-              }
-            )}
-            type='text'
-          />
-          {formik.touched.faculty && formik.errors.faculty && (
-            <div className='fv-plugins-message-container'>
-              <div className='fv-help-block'>
-                {typeof formik.errors.faculty === 'string' ? (
-                  <span role='alert'>{formik.errors.faculty}</span>
-                ) : (
-                  <span role='alert'>An error occurred with the Faculty field.</span>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
         <div className='fv-row mb-8' key={generateFieldKey('supervisor')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Felül vizsgáló</label>
           <select
