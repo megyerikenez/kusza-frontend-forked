@@ -35,7 +35,6 @@ export const BaseDataTab: React.FC<BaseDataTabProps> = ({formik}) => {
         <div className='fv-row mb-8' key={generateFieldKey('description')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Leírás</label>
           <input
-            placeholder={'description'}
             {...formik.getFieldProps('description')}
             className={clsx(
               'form-control bg-transparent',
@@ -66,7 +65,6 @@ export const BaseDataTab: React.FC<BaseDataTabProps> = ({formik}) => {
         <div className='fv-row mb-8 mt-8' key={generateFieldKey('deliveryNumber')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Azonositó kód</label>
           <input
-            placeholder={'deliveryNumber'}
             {...formik.getFieldProps('deliveryNumber')}
             className={clsx(
               'form-control bg-transparent',
@@ -123,7 +121,6 @@ export const BaseDataTab: React.FC<BaseDataTabProps> = ({formik}) => {
         <div className='fv-row mb-8' key={generateFieldKey('supplierRequester')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Beszerző</label>
           <input
-            placeholder={'supplierRequester'}
             {...formik.getFieldProps('supplierRequester')}
             className={clsx(
               'form-control bg-transparent',
@@ -155,7 +152,6 @@ export const BaseDataTab: React.FC<BaseDataTabProps> = ({formik}) => {
         <div className='fv-row mb-8' key={generateFieldKey('purchaserOrderNumber')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Vevői rendelés szám</label>
           <input
-            placeholder={'purchaserOrderNumber'}
             {...formik.getFieldProps('purchaserOrderNumber')}
             className={clsx(
               'form-control bg-transparent',

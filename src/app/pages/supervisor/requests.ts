@@ -4,6 +4,7 @@ import axios from 'axios'
 const API_URL = process.env.REACT_APP_API_URL
 const PUT_DECLINE_BID_URL = `${API_URL}/orderconfirmation/decline`
 const GET_BID_BY_BID_ID_URL = `${API_URL}/orderconfirmation/getbyid`
+const DELETE_BID_URL = `${API_URL}/orderconfirmation/delete`
 
 export const getAllBids = () => {
   return axios.get(GET_ALL_BIDS)
@@ -21,4 +22,8 @@ export const declineBid = (id: number, reason: string) => {
 
 export const getBidById = (id: number) => {
   return axios.get(`${GET_BID_BY_BID_ID_URL}/${id}`)
+}
+
+export const deleteBid = (id: number) => {
+  return axios.delete(`${DELETE_BID_URL}/${id}`)
 }
