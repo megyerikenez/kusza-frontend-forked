@@ -1,9 +1,12 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {useFormik} from 'formik'
 import clsx from 'clsx'
 import {initialValues, generateFieldKey} from '../helpers'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import {selectData, selectIsEditing} from '../editSelector'
+import {useSelector} from 'react-redux'
+import {set} from 'date-fns'
 
 interface BaseDataTabProps {
   formik: ReturnType<typeof useFormik>
@@ -11,6 +14,14 @@ interface BaseDataTabProps {
 
 export const BaseDataTab: React.FC<BaseDataTabProps> = ({formik}) => {
   const [selectedDate, setSelectedDate] = React.useState<Date | null>(null)
+  const isEditing = useSelector(selectIsEditing)
+  const data = useSelector(selectData)
+
+  useEffect(() => {
+    if (isEditing) {
+      setSelectedDate(new Date(data.deliveryDate))
+    }
+  }, [isEditing, data.deliveryDate])
 
   return (
     <div className={`card mt-8 mb-8`}>
