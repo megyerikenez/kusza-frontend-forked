@@ -4,6 +4,7 @@ import {IOrderItems} from './interfaces'
 const emptyState = {
   isEditing: false,
   data: {
+    id: 0,
     deliveryNumber: '',
     description: '',
     supplierRequester: '',
@@ -37,6 +38,7 @@ export const editSlice = createSlice({
       state.isEditing = action.payload
     },
     setData: (state, action) => {
+      state.data.id = action.payload.id
       state.data.deliveryNumber = action.payload.deliveryNumber
       state.data.description = action.payload.description
       state.data.supplierRequester = action.payload.supplierRequester
