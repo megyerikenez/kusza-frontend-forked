@@ -26,9 +26,13 @@ export const administratorSlice = createSlice({
     setPaymentMethods: (state, action) => {
       state.paymentMethods = action.payload
     },
+    deleteBidFromState: (state, action) => {
+      state.bids = state.bids.filter((bid) => bid.id !== action.payload)
+    },
   },
 })
 
-export const {setBids, setSupervisors, setPaymentMethods} = administratorSlice.actions
+export const {setBids, setSupervisors, setPaymentMethods, deleteBidFromState} =
+  administratorSlice.actions
 
 export default administratorSlice.reducer

@@ -10,10 +10,11 @@ import {AddItems} from './tabs/AddItemsTab'
 import {PageTitle} from '../../../../_metronic/layout/core'
 import {getSupervisors} from '../../../modules/auth/core/requests'
 import {useDispatch} from 'react-redux'
-import {setSupervisors} from '../state/administratorSlice'
-import {postBid, nextStatus} from '../requests'
+import {deleteBidFromState, setSupervisors} from '../state/administratorSlice'
+import {postBid, nextStatus, deleteBid} from '../requests'
 import {useSelector} from 'react-redux/es/hooks/useSelector'
 import {selectData, selectIsEditing} from './editSelector'
+import {Navigate} from 'react-router'
 type SelectCallback = (eventKey: string | null) => void
 
 function CreateNewBid() {
@@ -51,6 +52,7 @@ function CreateNewBid() {
       setLoading(true)
       console.log('Saving new bid data:', formik.values)
       await postBid(formik.values)
+
       formik.resetForm()
       setLoading(false)
     } catch (error) {
@@ -59,7 +61,18 @@ function CreateNewBid() {
     }
   }
 
-  const onClear = () => {
+  const onClear = async () => {
+    if (isEditing) {
+      try {
+        setLoading(true)
+        await deleteBid(data.id)
+        dispatch(deleteBidFromState(data.id))
+        setLoading(false)
+      } catch (error) {
+        console.error(error)
+        setLoading(false)
+      }
+    }
     formik.resetForm()
   }
 
@@ -114,6 +127,7 @@ function CreateNewBid() {
               <span className='indicator-progress' style={{display: 'block'}}>
                 Kérem várjon
                 <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
+                <Navigate to='/dashboard' replace={true} />
               </span>
             )}
           </button>
