@@ -4,8 +4,9 @@ import {BidHistory} from './BidHistory'
 import {setData, setIsEditing} from '../../CreateNewBid/editSlice'
 import {Link} from 'react-router-dom'
 import {userRolesSelector} from '../../../../modules/auth/state/authSelector'
-import {declineBid, nextStatus} from '../../../supervisor/requests'
+import {declineBid, getExcelFile, nextStatus} from '../../../supervisor/requests'
 import {selectSupervisors} from '../../state/administratorSelector'
+import {saveAs} from 'file-saver'
 
 export const AccordionBodyBaseData = (bid: INewBid) => {
   const userRoles: string[] = useSelector(userRolesSelector)
@@ -15,8 +16,17 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
     dispatch(setData(bid))
   }
 
-  const onDownload = () => {
-    console.log('download')
+  const onDownload = async () => {
+    try {
+      const response = await getExcelFile(bid.id)
+      const blob = new Blob([response.data], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      })
+
+      saveAs(blob, 'yourFileName.xlsx')
+    } catch (error) {
+      console.error('Error downloading file:', error)
+    }
   }
 
   const onDecline = () => {
@@ -150,7 +160,7 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
         )}
         {bid.status === 'ReadyToSign' && userRoles.includes('Supervisor') && (
           <div className='d-flex flex-column justify-content-around'>
-            <button onClick={() => onDecline} type='button' className='btn btn-danger mb-2 w-10'>
+            <button onClick={() => onDecline()} type='button' className='btn btn-danger mb-2 w-10'>
               <span className='indicator-label'>Elutasitás</span>
             </button>
             <button onClick={() => onSign()} type='button' className='btn btn-primary w-10'>
@@ -161,7 +171,7 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
 
         {bid.status === 'SupervisorSigned' && (
           <div className='d-flex align-items-center mt-1 fs-6 justify-content-center'>
-            <button onClick={() => onDownload} className='btn btn-primary'>
+            <button onClick={() => onDownload()} className='btn btn-primary'>
               Dokumentum letöltése
             </button>
           </div>

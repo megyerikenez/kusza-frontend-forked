@@ -27,3 +27,9 @@ export const getBidById = (id: number) => {
 export const deleteBid = (id: number) => {
   return axios.delete(`${DELETE_BID_URL}/${id}`)
 }
+
+export const getExcelFile = (id: number) => {
+  return axios.get(`${API_URL}/orderconfirmation/getexceldocument/${id}`, {
+    responseType: 'blob',
+  })
+}
