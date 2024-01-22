@@ -2,7 +2,7 @@ import {AsideMenuItemWithSub} from './AsideMenuItemWithSub'
 import {AsideMenuItem} from './AsideMenuItem'
 import {useSelector} from 'react-redux'
 import {userRolesSelector} from '../../../../app/modules/auth/state/authSelector'
-import {ADMINISTRATOR_ROLE} from '../../../helpers/roles'
+import {ADMINISTRATOR_ROLE, SUPERVISOR_ROLE} from '../../../helpers/roles'
 
 export function AsideMenuMain() {
   const userRole: string[] = useSelector(userRolesSelector)
@@ -46,6 +46,14 @@ export function AsideMenuMain() {
             />
             <AsideMenuItem to='/administrator/bids/declined' title='Elutasitott' hasBullet={true} />
           </AsideMenuItemWithSub>
+        </AsideMenuItemWithSub>
+      )}
+      {userRole.includes(SUPERVISOR_ROLE) && (
+        <AsideMenuItemWithSub to='/supervisor/bids' title='Megrendelések' hasBullet={true}>
+          <AsideMenuItem to='/supervisor/bids/all' title='Összes megrendelés' hasBullet={true} />
+          <AsideMenuItem to='/supervisor/bids/waiting' title='Aláírásra vár' hasBullet={true} />
+          <AsideMenuItem to='/supervisor/bids/signed' title='Aláírt' hasBullet={true} />
+          <AsideMenuItem to='/supervisor/bids/declined' title='Elutasított' hasBullet={true} />
         </AsideMenuItemWithSub>
       )}
     </>

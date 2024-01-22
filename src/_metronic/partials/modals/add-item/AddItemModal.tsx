@@ -65,7 +65,6 @@ export const AddItemModal = () => {
                       type='text'
                       className='form-control form-control-solid'
                       name='itemNumber'
-                      placeholder='Enter item number'
                     />
                     <ErrorMessage name='itemNumber' component='div' className='fv-help-block' />
                   </div>
@@ -75,18 +74,12 @@ export const AddItemModal = () => {
                       type='number'
                       className='form-control form-control-solid'
                       name='quantity'
-                      placeholder='Enter quantity'
                     />
                     <ErrorMessage name='quantity' component='div' className='fv-help-block' />
                   </div>
                   <div className='fv-row mb-10'>
                     <label className='required fw-bold fs-6 mb-2'>Egység</label>
-                    <Field
-                      type='number'
-                      className='form-control form-control-solid'
-                      name='unit'
-                      placeholder='Enter unit'
-                    />
+                    <Field type='number' className='form-control form-control-solid' name='unit' />
                     <ErrorMessage name='unit' component='div' className='fv-help-block' />
                   </div>
                   <div className='fv-row mb-10'>
@@ -95,7 +88,6 @@ export const AddItemModal = () => {
                       type='text'
                       className='form-control form-control-solid'
                       name='description'
-                      placeholder='Enter description'
                     />
                     <ErrorMessage name='description' component='div' className='fv-help-block' />
                   </div>
@@ -105,7 +97,6 @@ export const AddItemModal = () => {
                       type='number'
                       className='form-control form-control-solid'
                       name='currency'
-                      placeholder='Enter currency'
                     />
                     <ErrorMessage name='currency' component='div' className='fv-help-block' />
                   </div>
@@ -115,7 +106,6 @@ export const AddItemModal = () => {
                       type='text'
                       className='form-control form-control-solid'
                       name='netUnitPrice'
-                      placeholder='Enter net unit price'
                       readOnly
                     />
                     <ErrorMessage name='net' component='div' className='fv-help-block' />

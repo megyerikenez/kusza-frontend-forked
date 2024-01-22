@@ -3,6 +3,7 @@ import {authSlice} from './modules/auth/state/authSlice'
 import {itemSlice} from './pages/administrator/CreateNewBid/itemSlice'
 import {administratorSlice} from './pages/administrator/state/administratorSlice'
 import {editSlice} from './pages/administrator/CreateNewBid/editSlice'
+import {supervisorSlice} from './pages/supervisor/state/supervisorSlice'
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     item: itemSlice.reducer,
     administrator: administratorSlice.reducer,
     edit: editSlice.reducer,
+    supervisor: supervisorSlice.reducer,
   },
 })
 

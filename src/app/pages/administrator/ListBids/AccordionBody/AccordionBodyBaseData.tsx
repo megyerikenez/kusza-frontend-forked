@@ -3,14 +3,30 @@ import {INewBid, IOrderItems} from '../../CreateNewBid/interfaces'
 import {BidHistory} from './BidHistory'
 import {setData, setIsEditing} from '../../CreateNewBid/editSlice'
 import {Link} from 'react-router-dom'
+import {userRolesSelector} from '../../../../modules/auth/state/authSelector'
+import {declineBid, nextStatus} from '../../../supervisor/requests'
 import {selectSupervisors} from '../../state/administratorSelector'
 
 export const AccordionBodyBaseData = (bid: INewBid) => {
+  const userRoles: string[] = useSelector(userRolesSelector)
   const dispatch = useDispatch()
   const onEdit = () => {
     dispatch(setIsEditing(true))
     dispatch(setData(bid))
   }
+
+  const onDownload = () => {
+    console.log('download')
+  }
+
+  const onDecline = () => {
+    declineBid(bid.id, 'nemjo')
+  }
+
+  const onSign = async () => {
+    await nextStatus(bid.id)
+  }
+
   const isoDateToLocal = new Date(bid.deliveryDate).toLocaleDateString('hu-HU')
   const supervisors = useSelector(selectSupervisors)
 
@@ -121,23 +137,36 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
           </tbody>
         </table>
       </div>
-      <div className='d-flex align-items-center mt-1 fs-6 justify-content-center'>
+      <div className='d-flex align-items-center fs-4 justify-content-around'>
         <BidHistory {...bid} />
-      </div>
-      {bid.status === 'SupervisorSigned' && (
-        <div className='d-flex align-items-center mt-1 fs-6 justify-content-center'>
-          <button className='btn btn-primary'>Dokumentum letöltése</button>
-        </div>
-      )}
-      {bid.status === 'New' && (
-        <div className='d-flex align-items-center mt-1 fs-6 justify-content-center'>
-          <Link to={'/administrator/createnewbid'}>
-            <button onClick={onEdit} className='btn btn-primary'>
-              Szerkesztés
+        {bid.status === 'New' && userRoles.includes('Administrator') && (
+          <div className='d-flex align-items-center mt-1 fs-6 justify-content-center'>
+            <Link to={'/administrator/createnewbid'}>
+              <button onClick={onEdit} className='btn btn-primary'>
+                Szerkesztés
+              </button>
+            </Link>
+          </div>
+        )}
+        {bid.status === 'ReadyToSign' && userRoles.includes('Supervisor') && (
+          <div className='d-flex flex-column justify-content-around'>
+            <button onClick={() => onDecline} type='button' className='btn btn-danger mb-2 w-10'>
+              <span className='indicator-label'>Elutasitás</span>
             </button>
-          </Link>
-        </div>
-      )}
+            <button onClick={() => onSign()} type='button' className='btn btn-primary w-10'>
+              <span className='indicator-label'>Elfogadás</span>
+            </button>
+          </div>
+        )}
+
+        {bid.status === 'SupervisorSigned' && (
+          <div className='d-flex align-items-center mt-1 fs-6 justify-content-center'>
+            <button onClick={() => onDownload} className='btn btn-primary'>
+              Dokumentum letöltése
+            </button>
+          </div>
+        )}
+      </div>
     </>
   )
 }

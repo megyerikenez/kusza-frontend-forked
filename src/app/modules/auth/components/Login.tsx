@@ -21,6 +21,9 @@ import {
   setSupervisors,
 } from '../../../pages/administrator/state/administratorSlice'
 import {getUserBids} from '../../../pages/administrator/requests'
+import {ADMINISTRATOR_ROLE, SUPERVISOR_ROLE} from '../../../../_metronic/helpers/roles'
+import {getAllBids} from '../../../pages/supervisor/requests'
+import {setAllBids} from '../../../pages/supervisor/state/supervisorSlice'
 
 const requiredMessage = 'Kötelező mező'
 const maxLength = 50
@@ -56,17 +59,23 @@ export function Login() {
         const response = await login(values.email, values.password)
         setupAxiosAuthToken(axios, response.data.result.token)
         const userData = await getUserDataByToken()
-        dispatch(
+        const userRoles: string[] = userData.data.result.roles
+        await dispatch(
           setUserData({
             userName: userData.data.result.name,
             userRoles: userData.data.result.roles,
             userID: userData.data.result.id,
           })
         )
-        const bids = await getUserBids()
-        dispatch(setBids(bids.data.result))
-        const paymentMethods = await getPaymentMethods()
-        dispatch(setPaymentMethods(paymentMethods.data.result))
+        if (userRoles.includes(ADMINISTRATOR_ROLE)) {
+          const bids = await getUserBids()
+          dispatch(setBids(bids.data.result))
+          const paymentMethods = await getPaymentMethods()
+          dispatch(setPaymentMethods(paymentMethods.data.result))
+        } else if (userRoles.includes(SUPERVISOR_ROLE)) {
+          const bids = await getAllBids()
+          dispatch(setAllBids(bids.data.result))
+        }
         const supervisors = await getSupervisors()
         dispatch(setSupervisors(supervisors.data.result))
       } catch (error) {

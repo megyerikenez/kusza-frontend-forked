@@ -27,7 +27,6 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
             Organizáció egység megerősitése
           </label>
           <input
-            placeholder={'Confirm Organization Unit'}
             {...formik.getFieldProps('confirmOrganizationUnit')}
             className={clsx(
               'form-control bg-transparent',
@@ -98,7 +97,6 @@ export const OrganizationDataTab: React.FC<OrganizationDataTabProps> = ({formik}
         <div className='fv-row mb-8' key={generateFieldKey('invoiceAddress')}>
           <label className='form-label fs-6 fw-bolder text-dark'>Számlázási cím</label>
           <input
-            placeholder={'Invoice Address'}
             {...formik.getFieldProps('invoiceAddress')}
             className={clsx(
               'form-control bg-transparent',
