@@ -10,20 +10,25 @@ import {AddItems} from './tabs/AddItemsTab'
 import {PageTitle} from '../../../../_metronic/layout/core'
 import {useDispatch} from 'react-redux'
 import {deleteBidFromState} from '../state/administratorSlice'
-import {postBid, nextStatus, deleteBid} from '../requests'
+import {postBid, nextStatus, deleteBid, updateBid} from '../requests'
 import {useSelector} from 'react-redux/es/hooks/useSelector'
 import {selectData, selectIsEditing} from './editSelector'
 import {Navigate} from 'react-router'
+import {selectBids} from '../state/administratorSelector'
 type SelectCallback = (eventKey: string | null) => void
 
 function CreateNewBid() {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
   const [activeTab, setActiveTab] = useState('baseData')
-
+  const bids = useSelector(selectBids)
   const isEditing = useSelector(selectIsEditing)
   const data = useSelector(selectData)
   const values = isEditing ? data : initialValues
+
+  const isBidAlreadySaved = (id: string) => {
+    return bids.some((bid) => bid.id.toString() === id.toString())
+  }
 
   const formik = useFormik<FormikValues>({
     initialValues: values,
@@ -31,12 +36,16 @@ function CreateNewBid() {
     onSubmit: async (values, {setStatus, setSubmitting}) => {
       setLoading(true)
       try {
-        console.log('Submitting new bid data:', values)
-        const response = await postBid(formik.values)
-        const bidId = response.data.result['id']
-        await nextStatus(bidId)
-        formik.resetForm()
-        setLoading(false)
+        if (!isBidAlreadySaved(values.id)) {
+          console.log('Submitting new bid data:', values)
+          const response = await postBid(formik.values)
+          const bidId = response.data.result['id']
+          await nextStatus(bidId)
+          formik.resetForm()
+          setLoading(false)
+        } else {
+          console.log('TODO IMPLEMENT NOTIFICATION')
+        }
       } catch (error) {
         console.error(error)
         setStatus('Hibás adatok')
@@ -49,9 +58,11 @@ function CreateNewBid() {
   const onSave = async () => {
     try {
       setLoading(true)
-      console.log('Saving new bid data:', formik.values)
-      await postBid(formik.values)
-
+      if (isEditing) {
+        await updateBid(formik.values)
+      } else {
+        await postBid(formik.values)
+      }
       formik.resetForm()
       setLoading(false)
     } catch (error) {
