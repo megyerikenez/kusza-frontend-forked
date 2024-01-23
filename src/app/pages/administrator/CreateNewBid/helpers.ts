@@ -19,10 +19,6 @@ export const initialValues = {
   paymentMethod: '',
   deliveryDate: '',
   invoiceAddress: '',
-  year: '',
-  confirmationNumber: '',
-  category: '',
-  offerDescription: '',
   supervisor: '',
   orderConfirmationItems: Array<IOrderItems>(),
 }
