@@ -34,12 +34,19 @@ export const administratorSlice = createSlice({
     },
     updateBidInState: (state, action) => {
       const index = state.bids.findIndex((bid) => bid.id === action.payload.id)
-      state.bids[index] = action.payload
+      console.log(state.bids)
+      state.bids[index] = {...state.bids[index], ...action.payload}
     },
   },
 })
 
-export const {setBids, setSupervisors, setPaymentMethods, deleteBidFromState, addBidToState} =
-  administratorSlice.actions
+export const {
+  setBids,
+  setSupervisors,
+  setPaymentMethods,
+  deleteBidFromState,
+  addBidToState,
+  updateBidInState,
+} = administratorSlice.actions
 
 export default administratorSlice.reducer

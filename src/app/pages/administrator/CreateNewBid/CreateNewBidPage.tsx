@@ -9,11 +9,10 @@ import './styles/CreateNewBid.css'
 import {AddItems} from './tabs/AddItemsTab'
 import {PageTitle} from '../../../../_metronic/layout/core'
 import {useDispatch} from 'react-redux'
-import {addBidToState, deleteBidFromState} from '../state/administratorSlice'
-import {postBid, nextStatus, deleteBid, updateBid} from '../requests'
+import {addBidToState, deleteBidFromState, updateBidInState} from '../state/administratorSlice'
+import {postBid, nextStatus, deleteBid} from '../requests'
 import {useSelector} from 'react-redux/es/hooks/useSelector'
 import {selectData, selectIsEditing} from './editSelector'
-import {Navigate} from 'react-router'
 import {selectBids} from '../state/administratorSelector'
 type SelectCallback = (eventKey: string | null) => void
 
@@ -63,13 +62,19 @@ function CreateNewBid() {
   const onSave = async () => {
     try {
       setLoading(true)
-      if (isEditing) {
-        await updateBid(formik.values)
+      if (!isEditing) {
+        const response = await postBid(formik.values)
+        dispatch(addBidToState(response.data.result))
+        formik.resetForm()
+        setLoading(false)
+        return
       } else {
-        await postBid(formik.values)
+        //await updateBid(formik.values) TODO
+        dispatch(updateBidInState(formik.values))
+        formik.resetForm()
+        setLoading(false)
+        return
       }
-      formik.resetForm()
-      setLoading(false)
     } catch (error) {
       console.error(error)
       setLoading(false)
@@ -129,7 +134,6 @@ function CreateNewBid() {
               <span className='indicator-progress' style={{display: 'block'}}>
                 Kérem várjon
                 <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
-                <Navigate to='/dashboard' replace={true} />
               </span>
             )}
           </button>
