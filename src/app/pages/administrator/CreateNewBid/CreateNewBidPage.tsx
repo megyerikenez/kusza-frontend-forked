@@ -9,7 +9,7 @@ import './styles/CreateNewBid.css'
 import {AddItems} from './tabs/AddItemsTab'
 import {PageTitle} from '../../../../_metronic/layout/core'
 import {useDispatch} from 'react-redux'
-import {deleteBidFromState} from '../state/administratorSlice'
+import {addBidToState, deleteBidFromState} from '../state/administratorSlice'
 import {postBid, nextStatus, deleteBid, updateBid} from '../requests'
 import {useSelector} from 'react-redux/es/hooks/useSelector'
 import {selectData, selectIsEditing} from './editSelector'
@@ -27,7 +27,11 @@ function CreateNewBid() {
   const values = isEditing ? data : initialValues
 
   const isBidAlreadySaved = (id: string) => {
-    return bids.some((bid) => bid.id.toString() === id.toString())
+    try {
+      return bids.some((bid) => bid.id.toString() === id.toString())
+    } catch (error) {
+      return false
+    }
   }
 
   const formik = useFormik<FormikValues>({
@@ -40,6 +44,7 @@ function CreateNewBid() {
           console.log('Submitting new bid data:', values)
           const response = await postBid(formik.values)
           const bidId = response.data.result['id']
+          dispatch(addBidToState(response.data.result))
           await nextStatus(bidId)
           formik.resetForm()
           setLoading(false)
