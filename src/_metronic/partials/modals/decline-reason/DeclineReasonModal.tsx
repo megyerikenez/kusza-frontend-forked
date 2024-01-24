@@ -2,17 +2,22 @@ import {useState} from 'react'
 import {KTIcon} from '../../../helpers'
 import {useSelector} from 'react-redux'
 import {selectReasonId} from '../../../../app/pages/administrator/CreateNewBid/reasonSelector'
-import {declineBid} from '../../../../app/pages/supervisor/requests'
+import {declineBid, getBidById} from '../../../../app/pages/supervisor/requests'
+import {useDispatch} from 'react-redux'
+import {updateBidInState} from '../../../../app/pages/supervisor/state/supervisorSlice'
 
 export const DeclineReasonModal = () => {
   const [message, setMessage] = useState('')
   let bidId = useSelector(selectReasonId)
+  const dispatch = useDispatch()
 
   const handleSend = async () => {
-    console.log('message:', message)
+    console.log('message:', message, bidId)
     try {
       await declineBid(bidId, message)
       setMessage('')
+      let newBidData = await getBidById(bidId)
+      dispatch(updateBidInState(newBidData.data.result))
     } catch (error) {
       console.error(error)
     }
