@@ -55,7 +55,7 @@ export const AddItems: React.FC<AddItemsProps> = ({formik}) => {
           data-bs-toggle='tooltip'
           data-bs-placement='top'
           data-bs-trigger='hover'
-          title='Click to add a user'
+          title='Kattintson ide a termék hozzáadásához'
         >
           <a
             href='#'
