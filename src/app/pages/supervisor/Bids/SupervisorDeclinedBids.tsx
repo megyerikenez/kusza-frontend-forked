@@ -3,10 +3,11 @@ import {PageTitle} from '../../../../_metronic/layout/core'
 import {INewBid} from '../../administrator/CreateNewBid/interfaces'
 import {selectSupervisorBids} from '../state/supervisorSelectors'
 import {AccordionBodyWrapper} from '../../administrator/ListBids/AccordionBody/AccordionBodyWrapper'
+import {useEffect} from 'react'
 
 export const SupervisorDeclinedBids = () => {
   const bids = useSelector(selectSupervisorBids).filter((bid: INewBid) => bid.status === 'declined')
-
+  useEffect(() => {}, [bids])
   return (
     <>
       <PageTitle>Megrendelések</PageTitle>

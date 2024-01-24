@@ -3,12 +3,14 @@ import {PageTitle} from '../../../../_metronic/layout/core'
 import {selectSupervisorBids} from '../state/supervisorSelectors'
 import {INewBid} from '../../administrator/CreateNewBid/interfaces'
 import {AccordionBodyWrapper} from '../../administrator/ListBids/AccordionBody/AccordionBodyWrapper'
+import {useEffect} from 'react'
 
 export const SupervisorWaitingForSignBids = () => {
   const bids = useSelector(selectSupervisorBids).filter(
     (bid: INewBid) => bid.status === 'ReadyToSign'
   )
 
+  useEffect(() => {}, [bids])
   return (
     <>
       <PageTitle>Megrendelések</PageTitle>

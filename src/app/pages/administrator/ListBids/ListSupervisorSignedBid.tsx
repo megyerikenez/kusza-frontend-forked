@@ -4,10 +4,11 @@ import {INewBid} from '../CreateNewBid/interfaces'
 import {PageTitle} from '../../../../_metronic/layout/core'
 import {AccordionBodyWrapper} from './AccordionBody/AccordionBodyWrapper'
 import {KTIcon} from '../../../../_metronic/helpers'
+import {useEffect} from 'react'
 
 export const ListSupervisorSignedBid = () => {
   const bids = useSelector(selectBids).filter((bid: INewBid) => bid.status === 'SupervisorSigned')
-
+  useEffect(() => {}, [bids])
   return (
     <>
       <PageTitle>Megrendelések</PageTitle>

@@ -4,12 +4,14 @@ import {INewBid} from '../../administrator/CreateNewBid/interfaces'
 import {selectSupervisorBids} from '../state/supervisorSelectors'
 import {AccordionBodyWrapper} from '../../administrator/ListBids/AccordionBody/AccordionBodyWrapper'
 import {KTIcon} from '../../../../_metronic/helpers'
+import {useEffect} from 'react'
 
 export const SupervisorSignedBids = () => {
   const bids = useSelector(selectSupervisorBids).filter(
     (bid: INewBid) => bid.status === 'SupervisorSigned'
   )
 
+  useEffect(() => {}, [bids])
   return (
     <>
       <PageTitle>Megrendelések</PageTitle>
