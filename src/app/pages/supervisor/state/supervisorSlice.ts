@@ -16,7 +16,12 @@ export const supervisorSlice = createSlice({
     setAllBids: (state, action) => {
       state.bids = action.payload
     },
+    updateBidInState: (state, action) => {
+      const index = state.bids.findIndex((bid) => bid.id === action.payload.id)
+      console.log(state.bids)
+      state.bids[index] = {...state.bids[index], ...action.payload}
+    },
   },
 })
 
-export const {setAllBids} = supervisorSlice.actions
+export const {setAllBids, updateBidInState} = supervisorSlice.actions
