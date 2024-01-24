@@ -4,9 +4,10 @@ import {BidHistory} from './BidHistory'
 import {setData, setIsEditing} from '../../CreateNewBid/editSlice'
 import {Link} from 'react-router-dom'
 import {userRolesSelector} from '../../../../modules/auth/state/authSelector'
-import {declineBid, getExcelFile, nextStatus} from '../../../supervisor/requests'
+import {getExcelFile, nextStatus} from '../../../supervisor/requests'
 import {selectSupervisors} from '../../state/administratorSelector'
 import {saveAs} from 'file-saver'
+import {setReasonBidId} from '../../CreateNewBid/reasonSlice'
 
 export const AccordionBodyBaseData = (bid: INewBid) => {
   const userRoles: string[] = useSelector(userRolesSelector)
@@ -30,7 +31,7 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
   }
 
   const onDecline = () => {
-    declineBid(bid.id, 'nemjo')
+    dispatch(setReasonBidId(bid.id))
   }
 
   const onSign = async () => {
@@ -160,7 +161,13 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
         )}
         {bid.status === 'ReadyToSign' && userRoles.includes('Supervisor') && (
           <div className='d-flex flex-column justify-content-around'>
-            <button onClick={() => onDecline()} type='button' className='btn btn-danger mb-2 w-10'>
+            <button
+              onClick={() => onDecline()}
+              type='button'
+              className='btn btn-danger mb-2 w-10'
+              data-bs-toggle='modal'
+              data-bs-target='#declineReasonModal'
+            >
               <span className='indicator-label'>Elutasitás</span>
             </button>
             <button onClick={() => onSign()} type='button' className='btn btn-primary w-10'>
