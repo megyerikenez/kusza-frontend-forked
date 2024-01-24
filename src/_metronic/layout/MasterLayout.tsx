@@ -11,6 +11,7 @@ import {ActivityDrawer, AddItemModal, DrawerMessenger, InviteUsers, UpgradePlan}
 import {ThemeModeProvider} from '../partials/layout/theme-mode/ThemeModeProvider'
 import {MenuComponent} from '../assets/ts/components'
 import {Sidebar} from './components/Sidebar'
+import {DeclineReasonModal} from '../partials/modals/decline-reason/DeclineReasonModal'
 
 const MasterLayout = () => {
   const location = useLocation()
@@ -56,6 +57,7 @@ const MasterLayout = () => {
         <InviteUsers />
         <UpgradePlan />
         <AddItemModal />
+        <DeclineReasonModal />
         {/* end:: Modals */}
         <ScrollTop />
       </ThemeModeProvider>
