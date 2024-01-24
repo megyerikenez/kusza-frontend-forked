@@ -5,10 +5,12 @@ import {INewBid} from '../../administrator/CreateNewBid/interfaces'
 import {AccordionBodyWrapper} from '../../administrator/ListBids/AccordionBody/AccordionBodyWrapper'
 import {useSelector} from 'react-redux'
 import {selectSupervisorBids} from '../state/supervisorSelectors'
+import {useEffect} from 'react'
 
 export const SupervisorBids = () => {
   const bids = useSelector(selectSupervisorBids)
-  console.log(bids)
+
+  useEffect(() => {}, [bids])
 
   return (
     <>

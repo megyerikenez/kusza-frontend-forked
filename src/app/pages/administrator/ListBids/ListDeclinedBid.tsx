@@ -3,11 +3,13 @@ import {selectBids} from '../state/administratorSelector'
 import {INewBid} from '../CreateNewBid/interfaces'
 import {PageTitle} from '../../../../_metronic/layout/core'
 import {AccordionBodyWrapper} from './AccordionBody/AccordionBodyWrapper'
+import {useEffect} from 'react'
 
 export const ListDeclinedBid = () => {
   // TODO
   const bids = useSelector(selectBids).filter((bid: INewBid) => bid.status === 'declined')
 
+  useEffect(() => {}, [bids])
   return (
     <>
       <PageTitle>Megrendelések</PageTitle>

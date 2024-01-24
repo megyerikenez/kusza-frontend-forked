@@ -5,10 +5,12 @@ import {PageTitle} from '../../../../_metronic/layout/core'
 import {AccordionBodyWrapper} from './AccordionBody/AccordionBodyWrapper'
 import {MixedWidget14} from '../../../../_metronic/partials/widgets'
 import {StatWidget3} from '../widgets/StatWidget3'
+import {useEffect} from 'react'
 
 export const ListAllBid = () => {
   const bids = useSelector(selectBids)
-  console.log(bids)
+
+  useEffect(() => {}, [bids])
 
   return (
     <>
