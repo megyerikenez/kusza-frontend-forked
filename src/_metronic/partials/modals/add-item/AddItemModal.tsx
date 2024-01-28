@@ -2,14 +2,18 @@ import {useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {KTIcon} from '../../../helpers'
 import {addItem} from '../../../../app/pages/administrator/CreateNewBid/itemSlice'
+import {useSelector} from 'react-redux'
+import {selectCurrencies} from '../../../../app/pages/administrator/state/administratorSelector'
+import {generateFieldKey} from '../../../../app/pages/administrator/CreateNewBid/helpers'
 
 export const AddItemModal = () => {
+  const currencyList = useSelector(selectCurrencies)
   const dispatch = useDispatch()
   const [itemNumber, setItemNumber] = useState('')
   const [quantity, setQuantity] = useState(0)
   const [unit, setUnit] = useState(0)
   const [description, setDescription] = useState('')
-  const [currency, setCurrency] = useState(0)
+  const [currency, setCurrency] = useState('')
   const [netUnitPrice, setNetUnitPrice] = useState(0)
 
   const clearContent = () => {
@@ -17,7 +21,7 @@ export const AddItemModal = () => {
     setQuantity(0)
     setUnit(0)
     setDescription('')
-    setCurrency(0)
+    setCurrency('')
     setNetUnitPrice(0)
   }
 
@@ -111,13 +115,19 @@ export const AddItemModal = () => {
               <label className='col-xl-3 col-lg-3 col-form-label text-lg-end text-xl-start'>
                 Pénznem
               </label>
-              <div className='col-lg-9 col-xl-9'>
-                <input
+              <div className='col-lg-9 col-xl-9' key={generateFieldKey('currencies')}>
+                <select
                   className='form-control form-control-lg form-control-solid'
-                  type='text'
                   value={currency}
-                  onChange={(e) => setCurrency(parseInt(e.target.value))}
-                />
+                  onChange={(e) => setCurrency(e.target.value)}
+                >
+                  <option value=''>Válasszon fizetési módot...</option>
+                  {currencyList.map((currencie) => (
+                    <option key={currencie} value={currencie}>
+                      {currencie}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
 
