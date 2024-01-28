@@ -11,20 +11,20 @@ export const DeclineReasonModal = () => {
   let bidId = useSelector(selectReasonId)
   const dispatch = useDispatch()
 
+  const clearContent = () => {
+    setMessage('')
+  }
+
   const handleSend = async () => {
     console.log('message:', message, bidId)
     try {
       await declineBid(bidId, message)
-      setMessage('')
+      clearContent()
       let newBidData = await getBidById(bidId)
       dispatch(updateBidInState(newBidData.data.result))
     } catch (error) {
       console.error(error)
     }
-  }
-
-  const clearContent = () => {
-    setMessage('')
   }
 
   return (
