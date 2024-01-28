@@ -17,10 +17,11 @@ import {setUserData} from '../state/authSlice'
 import axios from 'axios'
 import {
   setBids,
+  setCurrencies,
   setPaymentMethods,
   setSupervisors,
 } from '../../../pages/administrator/state/administratorSlice'
-import {getUserBids} from '../../../pages/administrator/requests'
+import {getCurrencies, getUserBids} from '../../../pages/administrator/requests'
 import {ADMINISTRATOR_ROLE, SUPERVISOR_ROLE} from '../../../../_metronic/helpers/roles'
 import {getAllBids} from '../../../pages/supervisor/requests'
 import {setAllBids} from '../../../pages/supervisor/state/supervisorSlice'
@@ -72,6 +73,8 @@ export function Login() {
           dispatch(setBids(bids.data.result))
           const paymentMethods = await getPaymentMethods()
           dispatch(setPaymentMethods(paymentMethods.data.result))
+          const currencies = await getCurrencies()
+          dispatch(setCurrencies(currencies.data.result))
         } else if (userRoles.includes(SUPERVISOR_ROLE)) {
           const bids = await getAllBids()
           dispatch(setAllBids(bids.data.result))

@@ -5,12 +5,14 @@ export interface IAdministratorState {
   bids: INewBid[]
   supervisors: ISupervisor[]
   paymentMethods: string[]
+  currencies: string[]
 }
 
 const emptyState: IAdministratorState = {
   bids: [],
   supervisors: [],
   paymentMethods: [],
+  currencies: [],
 }
 
 export const administratorSlice = createSlice({
@@ -37,6 +39,9 @@ export const administratorSlice = createSlice({
       console.log(state.bids)
       state.bids[index] = {...state.bids[index], ...action.payload}
     },
+    setCurrencies: (state, action) => {
+      state.currencies = action.payload
+    },
   },
 })
 
@@ -47,6 +52,7 @@ export const {
   deleteBidFromState,
   addBidToState,
   updateBidInState,
+  setCurrencies,
 } = administratorSlice.actions
 
 export default administratorSlice.reducer

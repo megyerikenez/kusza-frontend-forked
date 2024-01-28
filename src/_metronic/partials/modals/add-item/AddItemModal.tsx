@@ -1,123 +1,167 @@
-import {Formik, Form, Field, ErrorMessage, useFormik, FormikValues} from 'formik'
-import {IOrderItems} from '../../../../app/pages/administrator/CreateNewBid/interfaces'
-import {KTIcon} from '../../../helpers'
+import {useState} from 'react'
 import {useDispatch} from 'react-redux'
+import {KTIcon} from '../../../helpers'
 import {addItem} from '../../../../app/pages/administrator/CreateNewBid/itemSlice'
+import {useSelector} from 'react-redux'
+import {selectCurrencies} from '../../../../app/pages/administrator/state/administratorSelector'
 
 export const AddItemModal = () => {
+  const currencyList = useSelector(selectCurrencies)
   const dispatch = useDispatch()
-  const initialValues: IOrderItems = {
-    itemNumber: '',
-    quantity: 0,
-    unit: 0,
-    description: '',
-    currency: 0,
-    netUnitPrice: 0,
+  const [itemNumber, setItemNumber] = useState('')
+  const [quantity, setQuantity] = useState(0)
+  const [unit, setUnit] = useState(0)
+  const [description, setDescription] = useState('')
+  const [currency, setCurrency] = useState('')
+  const [netUnitPrice, setNetUnitPrice] = useState(0)
+
+  const clearContent = () => {
+    setItemNumber('')
+    setQuantity(0)
+    setUnit(0)
+    setDescription('')
+    setCurrency('')
+    setNetUnitPrice(0)
   }
 
-  const formik = useFormik<FormikValues>({
-    initialValues,
-    onSubmit: (values, {setStatus, setSubmitting}) => {
-      try {
-        dispatch(addItem(values))
-        formik.resetForm()
-      } catch (error) {
-        console.error(error)
-        setStatus('Hibás adatok')
-        setSubmitting(false)
-      }
-    },
-  })
+  const handleSend = async () => {
+    try {
+      dispatch(addItem({itemNumber, quantity, unit, description, currency, netUnitPrice}))
+      clearContent()
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return (
     <div className='modal fade' id='modal_add_item' aria-hidden='true'>
       <div className='modal-dialog mw-650px'>
         <div className='modal-content'>
           <div className='modal-header pb-0 border-0 justify-content-end'>
-            <div className='btn btn-sm btn-icon btn-active-color-primary' data-bs-dismiss='modal'>
+            <div
+              className='btn btn-sm btn-icon btn-active-color-primary'
+              onClick={clearContent}
+              data-bs-dismiss='modal'
+            >
               <KTIcon iconName='cross' className='fs-1' />
             </div>
           </div>
 
           <div className='modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15'>
             <div className='text-center mb-13'>
-              <h1 className='mb-3'>Termék adatai</h1>
+              <h1 className='mb-5'>Termék adatai</h1>
             </div>
 
-            <Formik
-              initialValues={initialValues}
-              onSubmit={(values, {setStatus, setSubmitting}) => {
-                try {
-                  dispatch(addItem(values))
-                  formik.resetForm()
-                } catch (error) {
-                  console.error(error)
-                  setStatus('Hibás adatok')
-                  setSubmitting(false)
-                }
-              }}
+            <div className='form-group row mb-5'>
+              <label className='col-xl-3 col-lg-3 col-form-label text-lg-end text-xl-start'>
+                Azonosító szám
+              </label>
+              <div className='col-lg-9 col-xl-9'>
+                <input
+                  className='form-control form-control-lg form-control-solid'
+                  type='text'
+                  placeholder='Termék azonosító száma'
+                  value={itemNumber}
+                  onChange={(e) => setItemNumber(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className='form-group row mb-5'>
+              <label className='col-xl-3 col-lg-3 col-form-label text-lg-end text-xl-start'>
+                Mennyiség
+              </label>
+              <div className='col-lg-9 col-xl-9'>
+                <input
+                  className='form-control form-control-lg form-control-solid'
+                  type='number'
+                  value={quantity}
+                  onChange={(e) => setQuantity(parseInt(e.target.value))}
+                />
+              </div>
+            </div>
+
+            <div className='form-group row mb-5'>
+              <label className='col-xl-3 col-lg-3 col-form-label text-lg-end text-xl-start'>
+                Darabszám
+              </label>
+              <div className='col-lg-9 col-xl-9'>
+                <input
+                  className='form-control form-control-lg form-control-solid'
+                  type='text'
+                  value={unit}
+                  onChange={(e) => setUnit(parseInt(e.target.value))}
+                />
+              </div>
+            </div>
+
+            <div className='form-group row mb-5'>
+              <label className='col-xl-3 col-lg-3 col-form-label text-lg-end text-xl-start'>
+                Leírás
+              </label>
+              <div className='col-lg-9 col-xl-9'>
+                <input
+                  className='form-control form-control-lg form-control-solid'
+                  type='text'
+                  placeholder='Termék leírása'
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className='form-group row mb-5'>
+              <label className='col-xl-3 col-lg-3 col-form-label text-lg-end text-xl-start'>
+                Pénznem
+              </label>
+              <div className='col-lg-9 col-xl-9'>
+                <select
+                  className='form-control form-control-lg form-control-solid'
+                  value={currency}
+                  onChange={(e) => setCurrency(e.target.value)}
+                >
+                  <option value=''>Válasszon fizetési módot...</option>
+                  {currencyList.map((currencie) => (
+                    <option key={currencie} value={currencie}>
+                      {currencie}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className='form-group row'>
+              <label className='col-xl-3 col-lg-3 col-form-label text-lg-end text-xl-start'>
+                Nettó egységár
+              </label>
+              <div className='col-lg-9 col-xl-9'>
+                <input
+                  className='form-control form-control-lg form-control-solid'
+                  type='number'
+                  value={netUnitPrice}
+                  onChange={(e) => setNetUnitPrice(parseInt(e.target.value))}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className='modal-footer flex-center '>
+            <button
+              type='button'
+              className='btn btn-danger btn-active-light-primary px-6'
+              data-bs-dismiss='modal'
+              onClick={clearContent}
             >
-              {() => (
-                <Form>
-                  <div className='fv-row mb-10'>
-                    <label className='required fw-bold fs-6 mb-2'>Azonosító kód</label>
-                    <Field
-                      type='text'
-                      className='form-control form-control-solid'
-                      name='itemNumber'
-                    />
-                    <ErrorMessage name='itemNumber' component='div' className='fv-help-block' />
-                  </div>
-                  <div className='fv-row mb-10'>
-                    <label className='required fw-bold fs-6 mb-2'>Darab</label>
-                    <Field
-                      type='number'
-                      className='form-control form-control-solid'
-                      name='quantity'
-                    />
-                    <ErrorMessage name='quantity' component='div' className='fv-help-block' />
-                  </div>
-                  <div className='fv-row mb-10'>
-                    <label className='required fw-bold fs-6 mb-2'>Egység</label>
-                    <Field type='number' className='form-control form-control-solid' name='unit' />
-                    <ErrorMessage name='unit' component='div' className='fv-help-block' />
-                  </div>
-                  <div className='fv-row mb-10'>
-                    <label className='required fw-bold fs-6 mb-2'>Leírás</label>
-                    <Field
-                      type='text'
-                      className='form-control form-control-solid'
-                      name='description'
-                    />
-                    <ErrorMessage name='description' component='div' className='fv-help-block' />
-                  </div>
-                  <div className='fv-row mb-10'>
-                    <label className='required fw-bold fs-6 mb-2'>Valuta</label>
-                    <Field
-                      type='number'
-                      className='form-control form-control-solid'
-                      name='currency'
-                    />
-                    <ErrorMessage name='currency' component='div' className='fv-help-block' />
-                  </div>
-                  <div className='fv-row mb-10'>
-                    <label className='required fw-bold fs-6 mb-2'>Nettó egységár</label>
-                    <Field
-                      type='text'
-                      className='form-control form-control-solid'
-                      name='netUnitPrice'
-                      readOnly
-                    />
-                    <ErrorMessage name='net' component='div' className='fv-help-block' />
-                  </div>
-                  <div className='text-center'>
-                    <button type='submit' className='btn btn-primary' data-bs-dismiss='modal'>
-                      Save
-                    </button>
-                  </div>
-                </Form>
-              )}
-            </Formik>
+              Mégse
+            </button>
+            <button
+              type='button'
+              className='btn btn-primary px-6'
+              data-bs-dismiss='modal'
+              onClick={handleSend}
+            >
+              Mentés
+            </button>
           </div>
         </div>
       </div>

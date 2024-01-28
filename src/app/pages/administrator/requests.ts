@@ -4,6 +4,7 @@ const API_URL = process.env.REACT_APP_API_URL
 
 export const GET_ALL_BIDS = `${API_URL}/orderconfirmation/getall`
 export const GET_BID_BY_USERID_URL = `${API_URL}/orderconfirmation/getbyuserid`
+export const GET_CURRENCIES_URL = `${API_URL}/orderconfirmation/getcurrencies`
 export const POST_NEW_BID_URL = `${API_URL}/orderconfirmation/create`
 export const PUT_NEXT_STATUS_URL = `${API_URL}/orderconfirmation/movetonextstatus`
 export const PUT_UPDATE_BID_URL = `${API_URL}/orderconfirmation/update`
@@ -44,6 +45,10 @@ export function postBid(data: any) {
     ],
     SupervisorUserId: data['supervisor'],
   })
+}
+
+export const getCurrencies = () => {
+  return axios.get(GET_CURRENCIES_URL)
 }
 
 export const nextStatus = (id: number) => {
