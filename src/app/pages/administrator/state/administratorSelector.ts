@@ -20,3 +20,8 @@ export const isBidInStateSelector = createSelector(
   [selectBids],
   (bids) => (bidId: string) => bids.some((bid) => bid.id.toString() === bidId)
 )
+
+export const selectCurrencies = createSelector(
+  (state: RootState) => state.administrator.currencies,
+  (currencies) => currencies
+)
