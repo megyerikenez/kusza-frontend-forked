@@ -4,7 +4,6 @@ import {KTIcon} from '../../../helpers'
 import {addItem} from '../../../../app/pages/administrator/CreateNewBid/itemSlice'
 import {useSelector} from 'react-redux'
 import {selectCurrencies} from '../../../../app/pages/administrator/state/administratorSelector'
-import {generateFieldKey} from '../../../../app/pages/administrator/CreateNewBid/helpers'
 
 export const AddItemModal = () => {
   const currencyList = useSelector(selectCurrencies)
@@ -115,7 +114,7 @@ export const AddItemModal = () => {
               <label className='col-xl-3 col-lg-3 col-form-label text-lg-end text-xl-start'>
                 Pénznem
               </label>
-              <div className='col-lg-9 col-xl-9' key={generateFieldKey('currencies')}>
+              <div className='col-lg-9 col-xl-9'>
                 <select
                   className='form-control form-control-lg form-control-solid'
                   value={currency}
