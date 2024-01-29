@@ -8,6 +8,7 @@ import {getExcelFile, nextStatus} from '../../../supervisor/requests'
 import {selectSupervisors} from '../../state/administratorSelector'
 import {saveAs} from 'file-saver'
 import {setReasonBidId} from '../../CreateNewBid/reasonSlice'
+import toast from 'react-hot-toast'
 
 export const AccordionBodyBaseData = (bid: INewBid) => {
   const userRoles: string[] = useSelector(userRolesSelector)
@@ -23,10 +24,11 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
       const blob = new Blob([response.data], {
         type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       })
-
       saveAs(blob, 'yourFileName.xlsx')
+      toast.success('Sikeres letöltés')
     } catch (error) {
       console.error('Error downloading file:', error)
+      toast.error('Hiba a letöltés során')
     }
   }
 
@@ -35,7 +37,13 @@ export const AccordionBodyBaseData = (bid: INewBid) => {
   }
 
   const onSign = async () => {
-    await nextStatus(bid.id)
+    try {
+      await nextStatus(bid.id)
+      toast.success('Megrendelés elfogadva')
+    } catch (error) {
+      console.error(error)
+      toast.error('Hiba a megrendelés elfogadása során')
+    }
   }
 
   const isoDateToLocal = new Date(bid.deliveryDate).toLocaleDateString('hu-HU')

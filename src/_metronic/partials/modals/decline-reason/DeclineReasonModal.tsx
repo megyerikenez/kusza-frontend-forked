@@ -5,6 +5,7 @@ import {selectReasonId} from '../../../../app/pages/administrator/CreateNewBid/r
 import {declineBid, getBidById} from '../../../../app/pages/supervisor/requests'
 import {useDispatch} from 'react-redux'
 import {updateBidInState} from '../../../../app/pages/supervisor/state/supervisorSlice'
+import toast from 'react-hot-toast'
 
 export const DeclineReasonModal = () => {
   const [message, setMessage] = useState('')
@@ -22,8 +23,10 @@ export const DeclineReasonModal = () => {
       clearContent()
       let newBidData = await getBidById(bidId)
       dispatch(updateBidInState(newBidData.data.result))
+      toast.success('A megrendelés elutasítva')
     } catch (error) {
       console.error(error)
+      toast.error('Hiba a megrendelés elutasítása során')
     }
   }
 
