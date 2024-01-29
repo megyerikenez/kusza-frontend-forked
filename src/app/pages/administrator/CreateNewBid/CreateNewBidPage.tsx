@@ -14,6 +14,7 @@ import {postBid, nextStatus, deleteBid} from '../requests'
 import {useSelector} from 'react-redux/es/hooks/useSelector'
 import {selectData, selectIsEditing} from './editSelector'
 import {selectBids} from '../state/administratorSelector'
+import toast from 'react-hot-toast'
 type SelectCallback = (eventKey: string | null) => void
 
 function CreateNewBid() {
@@ -45,16 +46,15 @@ function CreateNewBid() {
           const bidId = response.data.result['id']
           dispatch(addBidToState(response.data.result))
           await nextStatus(bidId)
+          toast.success('Sikeres megrendelés létrehozás')
           formik.resetForm()
           setLoading(false)
-        } else {
-          console.log('TODO IMPLEMENT NOTIFICATION')
         }
       } catch (error) {
         console.error(error)
-        setStatus('Hibás adatok')
         setSubmitting(false)
         setLoading(false)
+        toast.error('Hiba a megrendelés létrehozása során')
       }
     },
   })
@@ -67,17 +67,20 @@ function CreateNewBid() {
         dispatch(addBidToState(response.data.result))
         formik.resetForm()
         setLoading(false)
+        toast.success('Sikeres mentés')
         return
       } else {
         //await updateBid(formik.values) TODO
         dispatch(updateBidInState(formik.values))
         formik.resetForm()
         setLoading(false)
+        toast.success('Sikeres mentés')
         return
       }
     } catch (error) {
       console.error(error)
       setLoading(false)
+      toast.error('Hiba a mentés során')
     }
   }
 
@@ -88,9 +91,11 @@ function CreateNewBid() {
         await deleteBid(data.id)
         dispatch(deleteBidFromState(data.id))
         setLoading(false)
+        toast.success('Sikeres törlés')
       } catch (error) {
         console.error(error)
         setLoading(false)
+        toast.error('Hiba a törlés során')
       }
     }
     formik.resetForm()
