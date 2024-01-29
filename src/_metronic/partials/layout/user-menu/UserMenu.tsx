@@ -165,7 +165,7 @@ const UserMenu = () => {
       {/* begin::Menu item */}
       <div className='menu-item px-5'>
         <a onClick={logout} className='menu-link px-5'>
-          Sign Out
+          Kijelentkezés
         </a>
       </div>
     </div>
