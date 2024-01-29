@@ -25,6 +25,7 @@ import {getCurrencies, getUserBids} from '../../../pages/administrator/requests'
 import {ADMINISTRATOR_ROLE, SUPERVISOR_ROLE} from '../../../../_metronic/helpers/roles'
 import {getAllBids} from '../../../pages/supervisor/requests'
 import {setAllBids} from '../../../pages/supervisor/state/supervisorSlice'
+import toast from 'react-hot-toast'
 
 const requiredMessage = 'Kötelező mező'
 const maxLength = 50
@@ -81,11 +82,12 @@ export function Login() {
         }
         const supervisors = await getSupervisors()
         dispatch(setSupervisors(supervisors.data.result))
+        toast.success('Sikeres bejelentkezés')
       } catch (error) {
         console.error(error)
-        setStatus('Hibás bejelentkezési adatok')
         setSubmitting(false)
         setLoading(false)
+        toast.error('Hibás bejelentkezési adatok')
       }
     },
   })
